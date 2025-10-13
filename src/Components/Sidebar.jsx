@@ -7,6 +7,9 @@ import Notification from '../assets/sidebar/Notification.png';
 import Setting from '../assets/sidebar/Setting.png';
 import profileLogo from '../assets/sidebar/profile.png';
 
+
+
+
 function Sidebar() {
   return (
    <div className="sidebar fixed top-0 left-0 w-[15%] h-[100vh]">

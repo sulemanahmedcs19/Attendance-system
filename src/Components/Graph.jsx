@@ -1,6 +1,8 @@
 import React from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 
+
+
 // Example data for the chart
 const data = [
   { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
