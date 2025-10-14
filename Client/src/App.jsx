@@ -1,6 +1,8 @@
 import React from 'react';
 import Dashboard from './Components/Dashboard';
-import Employe from './Components/Employe';
+import Employee from './Components/Employee';
+import Attendance from './Components/Attendance';
+
 import { BrowserRouter, Route ,Routes } from 'react-router-dom'; 
 
 function App() {
@@ -10,9 +12,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/Employe" element={<Employe />} />
+          <Route path="/Employee" element={<Employee />} />
           <Route path="/Dashboard" element={<Dashboard />} />
-        </Routes>
+          <Route path="/Attendance" element={<Attendance />} />
+          </Routes>
       </BrowserRouter>
     </>
   );

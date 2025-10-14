@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import Sidebar  from './Sidebar';
 import Header from './Header';
 
-function Employe() {
+function Employee() {
   return (
     <>
     <Sidebar />
     
-    <div className="w-30% ml-80  p-6 bg-white rounded-lg shadow-md">
+    <div className="w-30% ml-80  p-6 bg-gray-100 rounded-lg shadow-md">
     <Header />
       <form >
-       <div className="w-30% ml-8 mt-10  p-6 bg-white rounded-lg shadow-md">
+        
+       <div className="w-10% ml-8 mt-10  p-6 bg-white rounded-lg shadow-md">
         <h1 className="text-2xl font-semibold text-gray-800 mb-4">Basic Information</h1>
         <div className="flex flex-wrap gap-6 mb-6">
           <div className="w-85 ">
@@ -114,4 +115,4 @@ function Employe() {
 
 }
 
-export default Employe;
+export default Employee;
