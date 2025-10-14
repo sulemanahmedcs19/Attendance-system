@@ -6,6 +6,7 @@ import Logout from '../assets/sidebar/Logout.png';
 import Notification from '../assets/sidebar/Notification.png';
 import Setting from '../assets/sidebar/Setting.png';
 import profileLogo from '../assets/sidebar/profile.png';
+import { Link } from 'react-router-dom';
 
 
 
@@ -21,7 +22,7 @@ function Sidebar() {
            <ul className="w-full flex flex-col items-start justify-center gap-10 p-15 text-lg font-semibold">
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={dashboard} alt="Dashboard" className="w-5 h-5 mr-3" />
-               Dashboard
+               <Link to="/Dashboard">Dashboard</Link>
              </li>
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={Leaves} alt="Leaves" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
@@ -29,7 +30,7 @@ function Sidebar() {
              </li>
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={Employe} alt="Employee" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
-               Employee
+               <Link to="/Employe">Employe</Link>
              </li>
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={Attendace} alt="Attendance" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />

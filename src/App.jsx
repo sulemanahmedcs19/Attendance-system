@@ -1,23 +1,20 @@
 import React from 'react';
-import Header from './Components/Header';
-import Sidebar  from './Components/Sidebar';
-import Card from './Components/Card';
-
+import Dashboard from './Components/Dashboard';
+import Employe from './Components/Employe';
+import { BrowserRouter, Route ,Routes } from 'react-router-dom'; 
 
 
 function App() {
 
   return (
     <>
-      <div className="App flex bg-gray-100">
-
-        <Sidebar />
-        <div className="ml-[20%] w-[80%] flex flex-col mt-[2%]">
-          <Header />
-           <Card />
-        </div>
-
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/Employe" element={<Employe />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
