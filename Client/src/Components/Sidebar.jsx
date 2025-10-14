@@ -7,6 +7,10 @@ import Notification from '../assets/sidebar/Notification.png';
 import Setting from '../assets/sidebar/Setting.png';
 import profileLogo from '../assets/sidebar/profile.png';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD:src/Components/Sidebar.jsx
+=======
+
+>>>>>>> 3a79fa249f534802c090aabd145bcaa6921a3558:Client/src/Components/Sidebar.jsx
 
 
 
@@ -26,27 +30,31 @@ function Sidebar() {
              </li>
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={Leaves} alt="Leaves" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
-               Leaves
+                <button>Leaves</button>
              </li>
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={Employe} alt="Employee" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
+<<<<<<< HEAD:src/Components/Sidebar.jsx
                <Link to="/Employe">Employe</Link>
+=======
+               <Link to="/Employee">Employee</Link>
+>>>>>>> 3a79fa249f534802c090aabd145bcaa6921a3558:Client/src/Components/Sidebar.jsx
              </li>
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={Attendace} alt="Attendance" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
-               Attendance
+               <Link to="/Attendance">Attendance</Link>
              </li>
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={Notification} alt="Notifications" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
-               Notifications
+               <button>Notifications</button>
              </li>
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={Setting} alt="Settings" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
-               Settings
+               <button>Settings</button>
              </li>
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={Logout} alt="Logout" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
-               Logout
+               <button>Logout</button>
              </li>
            </ul>
          </div>

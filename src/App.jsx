@@ -3,7 +3,6 @@ import Dashboard from './Components/Dashboard';
 import Employe from './Components/Employe';
 import { BrowserRouter, Route ,Routes } from 'react-router-dom'; 
 
-
 function App() {
 
   return (
