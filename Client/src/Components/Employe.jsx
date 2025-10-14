@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Sidebar  from './Sidebar';
+import Header from './Header';
 
 function Employe() {
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <>
+    <Sidebar />
     
-      <form>
-       
+    <div className="w-30% ml-80  p-6 bg-white rounded-lg shadow-md">
+    <Header />
+      <form >
+       <div className="w-30% ml-8 mt-10  p-6 bg-white rounded-lg shadow-md">
         <h1 className="text-2xl font-semibold text-gray-800 mb-4">Basic Information</h1>
         <div className="flex flex-wrap gap-6 mb-6">
           <div className="w-85 ">
@@ -100,9 +105,13 @@ function Employe() {
             </select>
           </div>
         </div>
+        </div>
       </form>
     </div>
+
+    </>
   );
+
 }
 
 export default Employe;
