@@ -3,6 +3,7 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend, Tooltip, Responsi
 
 
 
+
 // Example data for the chart
 const data = [
   { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },

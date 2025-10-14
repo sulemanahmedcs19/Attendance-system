@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 function Employe() {
   return (
     <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    
       <form>
        
         <h1 className="text-2xl font-semibold text-gray-800 mb-4">Basic Information</h1>

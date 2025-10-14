@@ -6,6 +6,7 @@ import Graph from './Graph';
 function Dashboard() { 
     return (
       
+      
         <div className="App flex bg-gray-100">
 
         <Sidebar />
