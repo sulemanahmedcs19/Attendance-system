@@ -4,6 +4,7 @@ import Sidebar  from './Sidebar';
 import Header from './Header';
 import { useState } from 'react';
 
+
 function Employee() {
 
   const [employeeData, setEmployeeData] = useState({
@@ -24,15 +25,18 @@ function Employee() {
     WorkType: '',
   });
 
-    const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEmployeeData((prevData) => ({
-      ...prevData,
-      [name]: value,
+    function handleChange  (event) {
+      const {name , value } = event.target;
+    setEmployeeData(oldData => ({...oldData, 
+      [name]: value 
     }));
+      
+   
   };
 
-
+ function Savedata (){
+    console.log( employeeData);
+  }
   return (
     <>
     <Sidebar />
@@ -61,6 +65,7 @@ function Employee() {
           <div className="w-85">
             <label className=" text-gray-700">Gender</label>
             <select value={employeeData.Gender} onChange={handleChange} name="Gender" className="mt-1 p-2 w-full border border-gray-300 rounded-md">
+              <option value="Select The Option">--Select The Option--</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
@@ -69,9 +74,11 @@ function Employee() {
 
             <div className="w-85">
             <label className=" text-gray-700">Upload CNIC Photo</label>
-            <select className="mt-1 p-2 w-full border border-gray-300 rounded-md">
-              <option value="Male">Front</option>
-              <option value="Female">Bck</option>
+            <select value={employeeData.CNICPhoto} onChange={handleChange} name="CNICPhoto" className="mt-1 p-2 w-full border border-gray-300 rounded-md">
+              <option value="Select The Option">--Select The Option--</option>
+              <option value="Front">Front</option>
+              <option value="Back">Back</option>
+              <option value="None">None</option>
               
             </select>
           </div>
@@ -100,7 +107,7 @@ function Employee() {
           </div>
           <div className="w-85">
             <label className=" text-gray-700">Emergency Contact</label>
-            <input type="text" value={employeeData.EmergencyContact} onChange={handleChange} name="EmergencyContact" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+            <input type="text" value={employeeData.EContact} onChange={handleChange} name="EContact" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
         </div>
 
@@ -129,20 +136,27 @@ function Employee() {
           </div>
           <div className="w-85">
             <label className=" text-gray-700">Work Type</label>
-            <select className="mt-1 p-2 w-full border border-gray-300 rounded-md">
+            <select value={employeeData.WorkType} onChange={handleChange} name="WorkType" className="mt-1 p-2 w-full border border-gray-300 rounded-md">
+              <option value="Select The Option">--Select The Option--</option>
               <option value="Onsite">Onsite</option>
               <option value="Remote">Remote</option>
               <option value="Hybrid">Hybrid</option>
             </select>
           </div>
+
+           <button type="button" onClick={Savedata} className=" w-40 bg-gradient-to-r from-purple-500 to-pink-500 text-white  rounded-md text-sm font-medium hover:opacity-90 transition">save</button>
         </div>
         </div>
       </form>
     </div>
 
-    </>
+
+ </>
   );
 
 }
 
+
+
 export default Employee;
+
