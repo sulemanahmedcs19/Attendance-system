@@ -2,8 +2,37 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar  from './Sidebar';
 import Header from './Header';
+import { useState } from 'react';
 
 function Employee() {
+
+  const [employeeData, setEmployeeData] = useState({
+    FName: '',
+    DOB: '',
+    CNIC: '',
+    Gender: '',
+    CNICPhoto: '',
+    HomeAddress: '',
+    City: '',
+    Country: '',
+    PersonalEmail: '',
+    EContact: '',
+    JobTitle: '',
+    ReportingManager: '',
+    DateOfJoining: '',
+    Department: '',
+    WorkType: '',
+  });
+
+    const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEmployeeData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+
   return (
     <>
     <Sidebar />
@@ -17,21 +46,21 @@ function Employee() {
         <div className="flex flex-wrap gap-6 mb-6">
           <div className="w-85 ">
             <label className=" text-gray-700">Full Name</label>
-            <input type="text" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+            <input type="text" value={employeeData.FName} onChange={handleChange} name="FName" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
           <div className="w-85 ">
             <label className=" text-gray-700">Date of Birth</label>
             <input
-              type="date" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+              type="date" value={employeeData.DOB} onChange={handleChange} name="DOB" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
 
           <div className="w-85">
             <label className=" text-gray-700">CNIC Number</label>
-            <input type="text" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+            <input type="text" value={employeeData.CNIC} onChange={handleChange} name="CNIC" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
           <div className="w-85">
             <label className=" text-gray-700">Gender</label>
-            <select className="mt-1 p-2 w-full border border-gray-300 rounded-md">
+            <select value={employeeData.Gender} onChange={handleChange} name="Gender" className="mt-1 p-2 w-full border border-gray-300 rounded-md">
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
@@ -53,49 +82,50 @@ function Employee() {
         <div className="flex flex-wrap gap-6 mb-6">
           <div className="w-85">
             <label className=" text-gray-700">Home Address</label>
-            <input type="text" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+            <input type="text" value={employeeData.HomeAddress} onChange={handleChange} name="HomeAddress" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
           <div className="w-85">
             <label className=" text-gray-700">City</label>
-            <input type="text" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
-          
+            <input type="text" value={employeeData.City} onChange={handleChange} name="City" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+
           </div>
           <div className="w-85">
             <label className=" text-gray-700">Country</label>
-            <input type="text" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
-            
+            <input type="text" value={employeeData.Country} onChange={handleChange} name="Country" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+
           </div>
           <div className="w-85">
             <label className=" text-gray-700">Personal Email</label>
-            <input type="email" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+            <input type="email" value={employeeData.PersonalEmail} onChange={handleChange} name="PersonalEmail" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
           <div className="w-85">
             <label className=" text-gray-700">Emergency Contact</label>
-            <input type="text" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+            <input type="text" value={employeeData.EmergencyContact} onChange={handleChange} name="EmergencyContact" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
         </div>
 
        
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Roles & Work Details</h2>
+
         <div className="flex flex-wrap gap-6 mb-6">
           <div className="w-85">
             <label className=" text-gray-700">Job Title</label>
-            <input type="text" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+            <input type="text" value={employeeData.JobTitle} onChange={handleChange} name="JobTitle" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
           <div className="w-85">
             <label className=" text-gray-700">Reporting Manager</label>
             <input
-              type="text"className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+              type="text" value={employeeData.ReportingManager} onChange={handleChange} name="ReportingManager" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
           <div className="w-85">
             <label className=" text-gray-700">Date of Joining</label>
             <input
-              type="date" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+              type="date" value={employeeData.DateOfJoining} onChange={handleChange} name="DateOfJoining" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
           <div className="w-85">
             <label className=" text-gray-700">Department</label>
             <input
-              type="text"className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
+              type="text" value={employeeData.Department} onChange={handleChange} name="Department" className="mt-1 p-2 w-full border border-gray-300 rounded-md"/>
           </div>
           <div className="w-85">
             <label className=" text-gray-700">Work Type</label>
