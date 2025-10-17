@@ -31,21 +31,7 @@ function Employee() {
   function handleSubmit(event) {
     event.preventDefault();
     if (
-      employeeData.FName &&
-      employeeData.DOB &&
-      employeeData.CNIC &&
-      employeeData.Gender &&
-      employeeData.CNICPhoto &&
-      employeeData.HomeAddress &&
-      employeeData.City &&
-      employeeData.Country &&
-      employeeData.PersonalEmail &&
-      employeeData.EContact &&
-      employeeData.JobTitle &&
-      employeeData.ReportingManager &&
-      employeeData.DateOfJoining &&
-      employeeData.Department &&
-      employeeData.WorkType
+      employeeData.FName && employeeData.DOB &&employeeData.CNIC && employeeData.Gender && employeeData.CNICPhoto && employeeData.HomeAddress &&employeeData.City &&employeeData.Country &&employeeData.PersonalEmail &&employeeData.EContact &&employeeData.JobTitle &&employeeData.ReportingManager &&employeeData.DateOfJoining &&employeeData.Department &&employeeData.WorkType
     ) {
       console.log("Form submitted:", employeeData);
       alert(" Form submitted");
@@ -263,7 +249,7 @@ function Employee() {
       <div></div>
     </>
   );
-  
+
 }
 
 export default Employee;
