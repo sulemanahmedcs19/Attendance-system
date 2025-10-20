@@ -1,14 +1,54 @@
 import React from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import { Link } from 'react-router-dom';
+import Employee from "./Employee";
 
 
-function EmployeeList()
-{
+function EmployeeList() {
+  const getData = (
+    FName,
+    DOB,
+    CNIC,
+    Gender,
+    CNICPhoto,
+    HomeAddress,
+    City,
+    Country,
+    PersonalEmail,
+    EContact,
+    JobTitle,
+    ReportingManager,
+    DateOfJoining,
+    Department,
+    WorkType
+  ) => {
+    const employeeObject = {
+      FName,
+      DOB,
+      CNIC,
+      Gender,
+      CNICPhoto,
+      HomeAddress,
+      City,
+      Country,
+      PersonalEmail,
+      EContact,
+      JobTitle,
+      ReportingManager,
+      DateOfJoining,
+      Department,
+      WorkType,
+    };
+
+    console.log("🚀 Employee Data Submitted:", employeeObject);
+  };
 
   return (
     <>
+
+    <div>
+      <Employee onSubmit={getData} />
+    </div>
       <Sidebar />
       <div className="ml-60 mt-20 p-4 bg-white rounded-xl shadow-md w-[85%]">
         <Header />

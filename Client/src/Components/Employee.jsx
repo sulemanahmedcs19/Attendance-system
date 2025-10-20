@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { useState } from "react";
 
-function Employee() {
+function Employee (props) {
   const [employeeData, setEmployeeData] = useState({
     FName: "",
     DOB: "",
@@ -33,9 +33,13 @@ function Employee() {
     if (
       employeeData.FName && employeeData.DOB &&employeeData.CNIC && employeeData.Gender && employeeData.CNICPhoto && employeeData.HomeAddress &&employeeData.City &&employeeData.Country &&employeeData.PersonalEmail &&employeeData.EContact &&employeeData.JobTitle &&employeeData.ReportingManager &&employeeData.DateOfJoining &&employeeData.Department &&employeeData.WorkType
     ) {
-      console.log("Form submitted:", employeeData);
+     
+     
       alert(" Form submitted");
-    } else {
+      props.onSubmit(employeeData.FName, employeeData.DOB, employeeData.CNIC, employeeData.Gender, employeeData.CNICPhoto, employeeData.HomeAddress, employeeData.City, employeeData.Country, employeeData.PersonalEmail, employeeData.EContact, employeeData.JobTitle, employeeData.ReportingManager, employeeData.DateOfJoining, employeeData.Department, employeeData.WorkType);
+    } 
+    
+    else {
       alert("Please fill in all required fields before submitting");
     }
   }
