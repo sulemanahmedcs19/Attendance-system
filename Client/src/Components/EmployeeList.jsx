@@ -1,63 +1,25 @@
-import React from "react";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import React, { useState } from "react";
 import Employee from "./Employee";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
 
 
-function EmployeeList() {
-  const getData = (
-    FName,
-    DOB,
-    CNIC,
-    Gender,
-    CNICPhoto,
-    HomeAddress,
-    City,
-    Country,
-    PersonalEmail,
-    EContact,
-    JobTitle,
-    ReportingManager,
-    DateOfJoining,
-    Department,
-    WorkType
-  ) => {
-    const employeeData = {
-      FName,
-      DOB,
-      CNIC,
-      Gender,
-      CNICPhoto,
-      HomeAddress,
-      City,
-      Country,
-      PersonalEmail,
-      EContact,
-      JobTitle,
-      ReportingManager,
-      DateOfJoining,
-      Department,
-      WorkType,
-    };
+const EmployeeList = ({data}) => {
 
-    console.log("🚀 Employee Data Submitted:", employeeData);
-  };
-
+  
   return (
-    <>
+   <>
 
-    <div>
-      <Employee onSubmit={getData} />
-    </div>
+    
       <Sidebar />
       <div className="ml-60 mt-20 p-4 bg-white rounded-xl shadow-md w-[85%]">
         <Header />
 
+         
+
         <form>
           <div className="flex items-center justify-between mb-6 mt-20 px-4 py-3 bg-white rounded-md shadow">
-            <h1 className="text-lg font-semibold text-gray-800">
-              Attendance Overview
-            </h1>
+          
 
             <div className="flex items-center gap-3">
               <div>
@@ -103,6 +65,7 @@ function EmployeeList() {
                   <th className="py-3 px-4">Work Type</th>
                 </tr>
               </thead>
+              
             </table>
           </div>
         </form>

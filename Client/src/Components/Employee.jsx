@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { useState } from "react";
 
-function Employee (props) {
+function Employee({props}) {
   const [employeeData, setEmployeeData] = useState({
     FName: "",
     DOB: "",
@@ -30,16 +30,31 @@ function Employee (props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     if (
-      employeeData.FName && employeeData.DOB &&employeeData.CNIC && employeeData.Gender && employeeData.CNICPhoto && employeeData.HomeAddress &&employeeData.City &&employeeData.Country &&employeeData.PersonalEmail &&employeeData.EContact &&employeeData.JobTitle &&employeeData.ReportingManager &&employeeData.DateOfJoining &&employeeData.Department &&employeeData.WorkType
+      employeeData.FName &&
+      employeeData.DOB &&
+      employeeData.CNIC &&
+      employeeData.Gender &&
+      employeeData.CNICPhoto &&
+      employeeData.HomeAddress &&
+      employeeData.City &&
+      employeeData.Country &&
+      employeeData.PersonalEmail &&
+      employeeData.EContact &&
+      employeeData.JobTitle &&
+      employeeData.ReportingManager &&
+      employeeData.DateOfJoining &&
+      employeeData.Department &&
+      employeeData.WorkType
     ) {
-     
-     
       alert(" Form submitted");
-      props.onSubmit(employeeData.FName, employeeData.DOB, employeeData.CNIC, employeeData.Gender, employeeData.CNICPhoto, employeeData.HomeAddress, employeeData.City, employeeData.Country, employeeData.PersonalEmail, employeeData.EContact, employeeData.JobTitle, employeeData.ReportingManager, employeeData.DateOfJoining, employeeData.Department, employeeData.WorkType);
-    } 
+    props(employeeData);
     
-    else {
+        
+    } 
+   
+      else {
       alert("Please fill in all required fields before submitting");
     }
   }
@@ -253,7 +268,6 @@ function Employee (props) {
       <div></div>
     </>
   );
-
 }
 
 export default Employee;
