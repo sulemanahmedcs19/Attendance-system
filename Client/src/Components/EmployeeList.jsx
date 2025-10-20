@@ -22,7 +22,7 @@ function EmployeeList() {
     Department,
     WorkType
   ) => {
-    const employeeObject = {
+    const employeeData = {
       FName,
       DOB,
       CNIC,
@@ -40,7 +40,7 @@ function EmployeeList() {
       WorkType,
     };
 
-    console.log("🚀 Employee Data Submitted:", employeeObject);
+    console.log("🚀 Employee Data Submitted:", employeeData);
   };
 
   return (
