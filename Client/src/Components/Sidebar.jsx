@@ -30,6 +30,17 @@ function Sidebar() {
                <img src={Employe} alt="Employe" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
                <Link to="/Employee">Employee</Link>
              </li>
+
+              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
+               <img src={Employe} alt="Employe" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
+              <Link to="/EmployeeList">Employee List</Link>
+             </li>
+
+
+
+
+
+
              <li className="hover:text-[#b52fc8] w-full h-[40px] flex items-center pl-4 cursor-pointer">
                <img src={Attendace} alt="Attendance" className="w-5 h-5 mr-3 hover:text-[#b52fc8]" />
                <Link to="/Attendance">Attendance</Link>
