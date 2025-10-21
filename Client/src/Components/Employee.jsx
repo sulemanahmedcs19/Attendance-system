@@ -52,7 +52,24 @@ function Employee({props}) {
     props(employeeData);
     
         
-    } 
+   setEmployeeData({
+        FName: "",
+        DOB: "",
+        CNIC: "",
+        Gender: "",
+        CNICPhoto: "",
+        HomeAddress: "",
+        City: "",
+        Country: "",
+        PersonalEmail: "",
+        EContact: "",
+        JobTitle: "",
+        ReportingManager: "",
+        DateOfJoining: "",
+        Department: "",
+        WorkType: "",
+      });
+    }
    
       else {
       alert("Please fill in all required fields before submitting");

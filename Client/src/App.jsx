@@ -9,13 +9,13 @@ import { BrowserRouter, Route ,Routes } from 'react-router-dom';
 
 function App() {
 
+const [employees, setEmployees] = useState([]);
 
   
-   const getData=(data)=>
-    {
-      setEmployeeData(data);
-    }
-const [employeeData, setEmployeeData] = useState();
+  const getData = (data) => {
+    setEmployees((prevEmployees) => [...prevEmployees, data]);
+  };
+
     
  
   return (
@@ -25,8 +25,8 @@ const [employeeData, setEmployeeData] = useState();
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/Employee" element={<Employee props={getData} />} />
-          <Route path="/EmployeeList" element={<EmployeeList data={employeeData}/>} />
-          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/EmployeeList" element={<EmployeeList data={employees}/>} />
+          <Route path="/Dashboard" element={<Dashboard data={employees}/>} />
           <Route path="/Attendance" element={<Attendance />} />
           </Routes>
       </BrowserRouter>

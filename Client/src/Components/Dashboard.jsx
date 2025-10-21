@@ -3,7 +3,8 @@ import Sidebar  from './Sidebar';
 import Card from './Card';
 import Graph from './Graph';
 
-function Dashboard() { 
+function Dashboard({data}) { 
+  console.log(data);
     return (
       
       
