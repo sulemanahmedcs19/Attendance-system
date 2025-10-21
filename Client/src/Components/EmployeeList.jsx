@@ -58,27 +58,25 @@ const EmployeeList = ({ data }) => {
               </thead>
 
               <tbody>
-                {
-                  data.map((employee, index) => (
-                    <tr key={index}>
-                      <td className="py-2 px-4">{employee.FName}</td>
-                      <td className="py-2 px-4">{employee.DOB}</td>
-                      <td className="py-2 px-4">{employee.CNIC}</td>
-                      <td className="py-2 px-4">{employee.Gender}</td>
-                      <td className="py-2 px-4">{employee.CNICPhoto}</td>
-                      <td className="py-2 px-4">{employee.HomeAddress}</td>
-                      <td className="py-2 px-4">{employee.City}</td>
-                      <td className="py-2 px-4">{employee.Country}</td>
-                      <td className="py-2 px-4">{employee.PersonalEmail}</td>
-                      <td className="py-2 px-4">{employee.EContact}</td>
-                      <td className="py-2 px-4">{employee.JobTitle}</td>
-                      <td className="py-2 px-4">{employee.ReportingManager}</td>
-                      <td className="py-2 px-4">{employee.DateOfJoining}</td>
-                      <td className="py-2 px-4">{employee.Department}</td>
-                      <td className="py-2 px-4">{employee.WorkType}</td>
-                    </tr>
-                  ))
-              }
+                {data.map((employee, index) => (
+                  <tr key={index}>
+                    <td className="py-2 px-4">{employee.FName}</td>
+                    <td className="py-2 px-4">{employee.DOB}</td>
+                    <td className="py-2 px-4">{employee.CNIC}</td>
+                    <td className="py-2 px-4">{employee.Gender}</td>
+                    <td className="py-2 px-4">{employee.CNICPhoto}</td>
+                    <td className="py-2 px-4">{employee.HomeAddress}</td>
+                    <td className="py-2 px-4">{employee.City}</td>
+                    <td className="py-2 px-4">{employee.Country}</td>
+                    <td className="py-2 px-4">{employee.PersonalEmail}</td>
+                    <td className="py-2 px-4">{employee.EContact}</td>
+                    <td className="py-2 px-4">{employee.JobTitle}</td>
+                    <td className="py-2 px-4">{employee.ReportingManager}</td>
+                    <td className="py-2 px-4">{employee.DateOfJoining}</td>
+                    <td className="py-2 px-4">{employee.Department}</td>
+                    <td className="py-2 px-4">{employee.WorkType}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

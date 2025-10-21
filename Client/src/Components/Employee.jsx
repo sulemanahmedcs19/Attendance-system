@@ -62,7 +62,7 @@ function Employee({ props }) {
       <div className="ml-80 p-6 bg-gray-50 min-h-screen">
         <Header />
 
-         <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="w-10% ml-8 mt-10  p-6 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-semibold text-gray-800 mb-4">
               Basic Information
@@ -265,7 +265,6 @@ function Employee({ props }) {
       <div></div>
     </>
   );
-
 }
 
 export default Employee;
