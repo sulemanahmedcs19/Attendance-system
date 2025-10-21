@@ -9,7 +9,8 @@ import Graph from './Graph';
 
 
 
-function Card () {
+function Card ({data}) {
+   const totalEmployees = Array.isArray(data) ? data.length : 0; 
   return (
    <>
      <div className="p-6 flex flex-col gap-6">
@@ -45,13 +46,13 @@ function Card () {
                 <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center font-semibold text-sm">
   <div className="flex flex-col items-center">
     <div className="flex items-center gap-16">
-      <p className="text-4xl font-bold mr-2">15</p>
+      <p className="text-4xl font-bold mr-2">{totalEmployees}</p>
       
       <img src={emp} className="w-5 h-5" />
     </div>
     
     <p className="text-lg text-[#252C58] mt-2 p-3">Total Employees</p>
-    <p className="text-[#252C58]">+ 2 new employees added!</p>
+    <p className="text-[#252C58]">+ {totalEmployees} new employees added!</p>
   </div>
 </div>
 

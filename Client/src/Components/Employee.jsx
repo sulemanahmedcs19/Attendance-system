@@ -1,10 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-import { useState } from "react";
 
-function Employee({props}) {
+function Employee({ props }) {
   const [employeeData, setEmployeeData] = useState({
     FName: "",
     DOB: "",
@@ -23,36 +21,20 @@ function Employee({props}) {
     WorkType: "",
   });
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setEmployeeData((oldData) => ({ ...oldData, [name]: value }));
-  }
+  };
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (
-      employeeData.FName &&
-      employeeData.DOB &&
-      employeeData.CNIC &&
-      employeeData.Gender &&
-      employeeData.CNICPhoto &&
-      employeeData.HomeAddress &&
-      employeeData.City &&
-      employeeData.Country &&
-      employeeData.PersonalEmail &&
-      employeeData.EContact &&
-      employeeData.JobTitle &&
-      employeeData.ReportingManager &&
-      employeeData.DateOfJoining &&
-      employeeData.Department &&
-      employeeData.WorkType
-    ) {
-      alert(" Form submitted");
-    props(employeeData);
-    
-        
-   setEmployeeData({
+    const allFieldsFilled = Object.values(employeeData).every(Boolean);
+
+    if (allFieldsFilled) {
+      alert("Form submitted");
+      props(employeeData);
+      setEmployeeData({
         FName: "",
         DOB: "",
         CNIC: "",
@@ -69,20 +51,18 @@ function Employee({props}) {
         Department: "",
         WorkType: "",
       });
-    }
-   
-      else {
+    } else {
       alert("Please fill in all required fields before submitting");
     }
-  }
+  };
 
   return (
     <>
       <Sidebar />
-
-      <div className="w-30% ml-80  p-6 bg-gray-100 rounded-lg shadow-md">
+      <div className="ml-80 p-6 bg-gray-50 min-h-screen">
         <Header />
-        <form onSubmit={handleSubmit}>
+
+         <form onSubmit={handleSubmit}>
           <div className="w-10% ml-8 mt-10  p-6 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-semibold text-gray-800 mb-4">
               Basic Information
@@ -285,6 +265,7 @@ function Employee({props}) {
       <div></div>
     </>
   );
+
 }
 
 export default Employee;
