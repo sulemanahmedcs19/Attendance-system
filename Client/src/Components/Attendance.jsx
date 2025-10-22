@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
@@ -14,7 +14,6 @@ function Attendance() {
       checkIn: "08:00",
       checkOut: "05:00",
       workHours: "10h 2m",
-      statusColor: "#B52FC8",
     },
     {
       id: "3411421",
@@ -26,7 +25,6 @@ function Attendance() {
       checkIn: "00:00",
       checkOut: "00:00",
       workHours: "0m",
-      statusColor: "#AA0000",
     },
     {
       id: "2341121",
@@ -38,7 +36,6 @@ function Attendance() {
       checkIn: "10:30",
       checkOut: "18:00",
       workHours: "8h 30m",
-      statusColor: "#D5B500",
     },
     {
       id: "2341122",
@@ -50,7 +47,6 @@ function Attendance() {
       checkIn: "10:30",
       checkOut: "18:00",
       workHours: "8h 30m",
-      statusColor: "#D5B500",
     },
     {
       id: "2341123",
@@ -62,7 +58,6 @@ function Attendance() {
       checkIn: "10:30",
       checkOut: "18:00",
       workHours: "8h 30m",
-      statusColor: "#D5B500",
     },
     {
       id: "2341124",
@@ -74,9 +69,28 @@ function Attendance() {
       checkIn: "10:30",
       checkOut: "18:00",
       workHours: "8h 30m",
-      statusColor: "#D5B500",
     },
   ];
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredData, setFilteredData] = useState(attendanceData);
+
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchTerm(query);
+
+   
+  };
+
+  const handleFilter = () => {
+   const filtered = attendanceData.filter((item) => {
+      return (
+        item.id.includes(query) ||
+        item.employee.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+    setFilteredData(filtered);
+  };
 
   return (
     <>
@@ -91,13 +105,13 @@ function Attendance() {
             </h1>
 
             <div className="flex items-center gap-3">
-              <div>
-                <input
-                  type="text"
-                  placeholder="Quick Search..."
-                  className="pl-10 pr-3 py-2 rounded-md border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </div>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleSearch}
+                placeholder="Search by ID or Employee"
+                className="pl-10 pr-3 py-2 rounded-md border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
 
               <input
                 type="date"
@@ -106,6 +120,7 @@ function Attendance() {
 
               <button
                 type="button"
+                onClick={handleFilter}
                 className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:opacity-90 transition"
               >
                 Advanced Filters
@@ -130,7 +145,7 @@ function Attendance() {
               </thead>
 
               <tbody className="bg-white text-xl">
-                {attendanceData.map((row, index) => (
+                {filteredData.map((row, index) => (
                   <tr key={index} className="hover:bg-gray-50">
                     <td className="py-3 px-4 text-[#252C58] font-bold">
                       {row.id}
@@ -144,7 +159,7 @@ function Attendance() {
                     </td>
                     <td className="py-3 px-4 text-[#252C58]">{row.date}</td>
                     <td className="py-3 px-4 text-[#252C58]">{row.status}</td>
-                    <td className="py-3 px-4 text-[#252C58]">{row.checkIn} </td>
+                    <td className="py-3 px-4 text-[#252C58]">{row.checkIn}</td>
                     <td className="py-3 px-4 text-[#252C58]">{row.checkOut}</td>
                     <td className="py-3 px-4 text-[#252C58]">
                       {row.workHours}
