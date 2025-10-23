@@ -83,12 +83,12 @@ function Attendance() {
   };
 
   const handleFilter = () => {
-   const filtered = attendanceData.filter((item) => {
+    const filtered = attendanceData.filter((item) => {
+      const query = searchTerm;
       return (
         item.id.includes(query) ||
         item.employee.toLowerCase().includes(query.toLowerCase())
-      );
-    });
+);    });
     setFilteredData(filtered);
   };
 
