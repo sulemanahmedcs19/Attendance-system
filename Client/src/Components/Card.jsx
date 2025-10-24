@@ -7,11 +7,25 @@ import weather from "../assets/card/weather.png";
 import timeo from "../assets/card/time-out.png";
 import Graph from "./Graph";
 
-function Card({ data }) {
- 
-  const totalEmployees = Array.isArray(data) ? data.length : 0;
+function Card({ data,attendance }) {
+  let chkin;
+  let chekout;
+ let totalemp= 15; 
+let p=5;
+let a=totalemp-p;
 
- 
+// const totalEmployees = Array.isArray(data) ? data.length : 0;
+let te=data.length;
+
+if(Array.isArray(data)){                                    
+  te
+} 
+else{te=0};
+
+
+
+
+
 
   return (
     <>
@@ -40,11 +54,11 @@ function Card({ data }) {
             <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center font-semibold text-sm">
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-16">
-                  <p className="text-4xl font-bold mr-2">{totalEmployees}</p>
+                  <p className="text-4xl font-bold mr-2">{te}</p>
                   <img src={emp} className="w-5 h-5" />
                 </div>
                 <p className="text-lg text-[#252C58] mt-2 p-3">Total Employees</p>
-                <p className="text-[#252C58]">+ {totalEmployees} new employees added!</p>
+                <p className="text-[#252C58]">+ {te} new employees added!</p>
               </div>
             </div>
 
@@ -64,7 +78,7 @@ function Card({ data }) {
             <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center font-semibold text-sm">
               <div className="flex flex-col items-center">
                 <div className="flex items-center">
-                  <p className="text-4xl font-bold">02</p>
+                  <p className="text-4xl font-bold">{a}</p>
                   <img src={weather} className="w-5 h-5 ml-20" />
                 </div>
                 <p className="text-lg text-[#252C58] p-3">Absent</p>
@@ -99,10 +113,10 @@ function Card({ data }) {
             <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center font-semibold text-sm">
               <div className="flex flex-col items-center">
                 <div className="flex items-center">
-                  <p className="text-4xl font-bold">42</p>
+                  <p className="text-4xl font-bold">{p}</p>
                   <img src={date} className="w-5 h-5 ml-20" />
                 </div>
-                <p className="text-lg text-[#252C58] p-3">Time-off</p>
+                <p className="text-lg text-[#252C58] p-3">Pressent</p>
                 <p className="text-[#252C58] mt-2">2% Increase than yesterday</p>
               </div>
             </div>

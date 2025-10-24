@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
-function Employee({ props }) {
+function Employee(empData) {
+  console.log(empData);
   const [employeeData, setEmployeeData] = useState({
     FName: "",
     DOB: "",
@@ -33,7 +34,7 @@ function Employee({ props }) {
 
     if (allFieldsFilled) {
       alert("Form submitted");
-      props(employeeData);
+      empData(employeeData);
       setEmployeeData({
         FName: "",
         DOB: "",

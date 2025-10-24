@@ -2,78 +2,11 @@ import React, { useState } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
-function Attendance() {
-  const attendanceData = [
-    {
-      id: "2341421",
-      employee: "DilShaad",
-      role: "Development",
-      department: "Production",
-      date: "26 July 2025",
-      status: "Work from office",
-      checkIn: "08:00",
-      checkOut: "05:00",
-      workHours: "10h 2m",
-    },
-    {
-      id: "3411421",
-      employee: "Ghazali",
-      role: "Senior Executive",
-      department: "Sales",
-      date: "26 July 2025",
-      status: "Absent",
-      checkIn: "00:00",
-      checkOut: "00:00",
-      workHours: "0m",
-    },
-    {
-      id: "2341121",
-      employee: "Hamza",
-      role: "Senior Manager",
-      department: "Design",
-      date: "26 July 2025",
-      status: "Late arrival",
-      checkIn: "10:30",
-      checkOut: "18:00",
-      workHours: "8h 30m",
-    },
-    {
-      id: "2341122",
-      employee: "Kinza",
-      role: "Senior Manager",
-      department: "Marketing",
-      date: "26 July 2025",
-      status: "Late arrival",
-      checkIn: "10:30",
-      checkOut: "18:00",
-      workHours: "8h 30m",
-    },
-    {
-      id: "2341123",
-      employee: "Shahzaib Umrani",
-      role: "Senior Manager",
-      department: "Design",
-      date: "26 July 2025",
-      status: "Late arrival",
-      checkIn: "10:30",
-      checkOut: "18:00",
-      workHours: "8h 30m",
-    },
-    {
-      id: "2341124",
-      employee: "Asim Khan",
-      role: "Senior Manager",
-      department: "Design",
-      date: "26 July 2025",
-      status: "Late arrival",
-      checkIn: "10:30",
-      checkOut: "18:00",
-      workHours: "8h 30m",
-    },
-  ];
+function Attendance({data}) {
+ 
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState(attendanceData);
+  const [filteredData, setFilteredData] = useState(data);
 
   const handleSearch = (e) => {
     const query = e.target.value;
@@ -83,12 +16,11 @@ function Attendance() {
   };
 
   const handleFilter = () => {
-    const filtered = attendanceData.filter((item) => {
-      const query = searchTerm;
-      return (
-        item.id.includes(query) ||
-        item.employee.toLowerCase().includes(query.toLowerCase())
-);    });
+    const filtered = data.filter((item) => {
+      
+      return(
+        item.id.includes(searchTerm) ||item.employee.toLowerCase().includes(searchTerm.toLowerCase()));
+    });
     setFilteredData(filtered);
   };
 
