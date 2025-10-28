@@ -7,25 +7,31 @@ import weather from "../assets/card/weather.png";
 import timeo from "../assets/card/time-out.png";
 import Graph from "./Graph";
 
-function Card({ data,attendance }) {
+function Card({ data, attendance }) {
+  console.log(data);
+
   let chkin;
   let chekout;
- let totalemp= 15; 
-let p=5;
-let a=totalemp-p;
+  let totalemp = 15;
+  let p = 5;
+  let a = totalemp - p;
 
-// const totalEmployees = Array.isArray(data) ? data.length : 0;
-let te=data.length;
+  // const totalEmployees = Array.isArray(data) ? data.length : 0;
 
-if(Array.isArray(data)){                                    
-  te
-} 
-else{te=0};
+  // te 0 zyada he , show krwado te
+  // warna 0 hi rehne do
+  let te = data.data.length;
+  // console.log(te);
 
+  // if (te != zero)
 
+  //   {
+  //   console.log(te);
+  // }
 
-
-
+  // else {
+  //   console.log(zero);
+  // }
 
   return (
     <>
@@ -39,8 +45,12 @@ else{te=0};
                 <p className="text-2xl text-[#252C58]">8:02:09 PM</p>
               </div>
 
-              <p className="text-lg ml-12 mb-4 text-[#252C58]">Realtime Insight</p>
-              <p className="text-lg ml-12 text-[#252C58]">Today: 2nd August 2023</p>
+              <p className="text-lg ml-12 mb-4 text-[#252C58]">
+                Realtime Insight
+              </p>
+              <p className="text-lg ml-12 text-[#252C58]">
+                Today: 2nd August 2023
+              </p>
 
               <button className="mt-6 p-2 bg-[#b52fc8] text-[#ffffff] rounded-md hover:bg-[#9e24a3]">
                 Advanced Configuration
@@ -48,16 +58,16 @@ else{te=0};
             </div>
           </div>
 
-         
           <div className="grid grid-cols-3 gap-4 w-2/3">
-           
             <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center font-semibold text-sm">
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-16">
                   <p className="text-4xl font-bold mr-2">{te}</p>
                   <img src={emp} className="w-5 h-5" />
                 </div>
-                <p className="text-lg text-[#252C58] mt-2 p-3">Total Employees</p>
+                <p className="text-lg text-[#252C58] mt-2 p-3">
+                  Total Employees
+                </p>
                 <p className="text-[#252C58]">+ {te} new employees added!</p>
               </div>
             </div>
@@ -94,11 +104,12 @@ else{te=0};
                   <img src={timeo} className="w-5 h-5 ml-20" />
                 </div>
                 <p className="text-lg text-[#252C58] p-3">Late Arrival</p>
-                <p className="text-[#252C58] mt-2">+3% Increase than yesterday</p>
+                <p className="text-[#252C58] mt-2">
+                  +3% Increase than yesterday
+                </p>
               </div>
             </div>
 
-            
             <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center font-semibold text-sm">
               <div className="flex flex-col items-center">
                 <div className="flex items-center">
@@ -117,7 +128,9 @@ else{te=0};
                   <img src={date} className="w-5 h-5 ml-20" />
                 </div>
                 <p className="text-lg text-[#252C58] p-3">Pressent</p>
-                <p className="text-[#252C58] mt-2">2% Increase than yesterday</p>
+                <p className="text-[#252C58] mt-2">
+                  2% Increase than yesterday
+                </p>
               </div>
             </div>
           </div>
@@ -131,9 +144,11 @@ else{te=0};
           <div className="flex flex-col gap-4 w-[40%]">
             <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center font-semibold text-sm">
               <div className="flex flex-col items-center">
-                <p className="text-4xl font-bold">12</p>
+                <p className="text-4xl font-bold">{p}</p>
                 <p className="text-lg text-[#252C58]">Check-in</p>
-                <p className="text-[#252C58] mt-2">+3% Increase than yesterday</p>
+                <p className="text-[#252C58] mt-2">
+                  +3% Increase than yesterday
+                </p>
               </div>
             </div>
 
@@ -141,7 +156,9 @@ else{te=0};
               <div className="flex flex-col items-center">
                 <p className="text-4xl font-bold">02</p>
                 <p className="text-lg text-[#252C58]">Check-out</p>
-                <p className="text-[#252C58] mt-2">2% Increase than yesterday</p>
+                <p className="text-[#252C58] mt-2">
+                  2% Increase than yesterday
+                </p>
               </div>
             </div>
           </div>

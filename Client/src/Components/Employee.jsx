@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
-function Employee(empData) {
-  console.log(empData);
+function Employee({ empData }) {
   const [employeeData, setEmployeeData] = useState({
     FName: "",
     DOB: "",

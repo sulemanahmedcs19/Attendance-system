@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import Card from "./Card";
 import Graph from "./Graph";
 
-function Dashboard({ data, attendance }) {
+function Dashboard(data, attendance) {
   return (
     <div className="App flex bg-gray-100">
       <Sidebar />
