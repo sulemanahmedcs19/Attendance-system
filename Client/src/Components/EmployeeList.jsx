@@ -6,6 +6,8 @@ const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedEmployee, setSelectedEmployee] = useState(null); // modal ke liye
+  const [isModalOpen, setIsModalOpen] = useState(false); // modal toggle
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -30,8 +32,15 @@ const EmployeeList = () => {
     );
     setFilteredData(filtered);
   };
+
   const handleUpdateClick = (employee) => {
-    console.log(employee);
+    setSelectedEmployee(employee);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedEmployee(null);
   };
 
   return (
@@ -130,6 +139,71 @@ const EmployeeList = () => {
           </div>
         </form>
       </div>
+
+      {isModalOpen && selectedEmployee && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-[700px] max-h-[80vh] overflow-y-auto">
+            <h2 className="text-2xl font-semibold mb-4">Employee Details</h2>
+            <div className="space-y-2">
+              <p>
+                <strong>Full Name:</strong> {selectedEmployee.FName}
+              </p>
+              <p>
+                <strong>Date of Birth:</strong> {selectedEmployee.DOB}
+              </p>
+              <p>
+                <strong>CNIC:</strong> {selectedEmployee.CNIC}
+              </p>
+              <p>
+                <strong>Gender:</strong> {selectedEmployee.Gender}
+              </p>
+              <p>
+                <strong>CNIC Photo:</strong> {selectedEmployee.CNICPhoto}
+              </p>
+              <p>
+                <strong>Home Address:</strong> {selectedEmployee.HomeAddress}
+              </p>
+              <p>
+                <strong>City:</strong> {selectedEmployee.City}
+              </p>
+              <p>
+                <strong>Country:</strong> {selectedEmployee.Country}
+              </p>
+              <p>
+                <strong>Personal Email:</strong> {selectedEmployee.email}
+              </p>
+              <p>
+                <strong>Emergency Contact:</strong> {selectedEmployee.EContact}
+              </p>
+              <p>
+                <strong>Job Title:</strong> {selectedEmployee.JobTitle}
+              </p>
+              <p>
+                <strong>Reporting Manager:</strong>{" "}
+                {selectedEmployee.ReportingManager}
+              </p>
+              <p>
+                <strong>Date of Joining:</strong>{" "}
+                {selectedEmployee.DateOfJoining}
+              </p>
+              <p>
+                <strong>Department:</strong> {selectedEmployee.Department}
+              </p>
+              <p>
+                <strong>Work Type:</strong> {selectedEmployee.WorkType}
+              </p>
+            </div>
+            <div className="mt-4 text-right">
+              <button
+                onClick={handleCloseModal}
+                className="bg-red-500 text-white px-4 py-2 rounded-md"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
