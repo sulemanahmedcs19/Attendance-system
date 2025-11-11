@@ -1,27 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
-const EmployeeList = ({ data }) => {
-  
+const EmployeeList = () => {
+  const [employees, setEmployees] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState(data);
 
- 
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      const response = await fetch(
+        "http://localhost:3000/api/employee/getAllEmployees"
+      );
+      const result = await response.json();
+      setEmployees(result);
+      setFilteredData(result);
+    };
+
+    fetchEmployees();
+  }, []);
+
   const handleSearchChange = (e) => {
-    const query = e.target.value;
-    setSearchTerm(query);
+    setSearchTerm(e.target.value);
   };
 
- 
   const handleSearchClick = () => {
-    const filtered = data.filter((employee) =>
-      employee.FName.toLowerCase().includes(searchTerm.toLowerCase())
+    const filtered = employees.filter((employee) =>
+      employee.FName?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredData(filtered);
   };
-
-
+  const handleUpdateClick = (employee) => {
+    console.log(employee);
+  };
 
   return (
     <>
@@ -32,20 +43,13 @@ const EmployeeList = ({ data }) => {
         <form>
           <div className="flex items-center justify-between mb-6 mt-20 px-4 py-3 bg-white rounded-md shadow">
             <div className="flex items-center gap-3">
-            
-              <div>
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                  placeholder="Search by Employee Name..."
-                  className="pl-10 pr-3 py-2 rounded-md border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
-                />
-              </div>
-
-           
-
-              
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder="Search by Employee Name..."
+                className="pl-10 pr-3 py-2 rounded-md border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
               <button
                 type="button"
                 onClick={handleSearchClick}
@@ -56,11 +60,10 @@ const EmployeeList = ({ data }) => {
             </div>
           </div>
 
-        
           <div className="bg-white">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left textsize-0.5">
+                <tr className="text-left">
                   <th className="py-3 px-4">Full Name</th>
                   <th className="py-3 px-4">DOB</th>
                   <th className="py-3 px-4">CNIC #</th>
@@ -76,14 +79,17 @@ const EmployeeList = ({ data }) => {
                   <th className="py-3 px-4">Date of Joining</th>
                   <th className="py-3 px-4">Department</th>
                   <th className="py-3 px-4">Work Type</th>
+                  <th className="py-3 px-4">Actions</th>
                 </tr>
               </thead>
 
               <tbody>
                 {filteredData.length > 0 ? (
-                  filteredData.map((employee, index) => (
-                    <tr key={index}>
-                      <td className="py-2 px-4 font-semibold">{employee.FName}</td>
+                  filteredData.map((employee) => (
+                    <tr key={employee._id}>
+                      <td className="py-2 px-4 font-semibold">
+                        {employee.FName}
+                      </td>
                       <td className="py-2 px-4">{employee.DOB}</td>
                       <td className="py-2 px-4">{employee.CNIC}</td>
                       <td className="py-2 px-4">{employee.Gender}</td>
@@ -91,18 +97,30 @@ const EmployeeList = ({ data }) => {
                       <td className="py-2 px-4">{employee.HomeAddress}</td>
                       <td className="py-2 px-4">{employee.City}</td>
                       <td className="py-2 px-4">{employee.Country}</td>
-                      <td className="py-2 px-4">{employee.PersonalEmail}</td>
+                      <td className="py-2 px-4">{employee.email}</td>
                       <td className="py-2 px-4">{employee.EContact}</td>
                       <td className="py-2 px-4">{employee.JobTitle}</td>
                       <td className="py-2 px-4">{employee.ReportingManager}</td>
                       <td className="py-2 px-4">{employee.DateOfJoining}</td>
                       <td className="py-2 px-4">{employee.Department}</td>
                       <td className="py-2 px-4">{employee.WorkType}</td>
+                      <td className="py-2 px-4 flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateClick(employee)}
+                          className="bg-purple-500 text-white px-3 py-1 rounded  opacity-70"
+                        >
+                          Update
+                        </button>
+                        <button className="bg-purple-500 text-white px-3 py-1 rounded  opacity-70">
+                          Delete
+                        </button>
+                      </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="15" className="text-center py-4 text-gray-500">
+                    <td colSpan="16" className="text-center py-4 text-gray-500">
                       No employee found.
                     </td>
                   </tr>

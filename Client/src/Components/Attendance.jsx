@@ -1,28 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
-function Attendance({data}) {
- 
+function Attendance() {
+  const [data, setData] = useState([]);
+  // const [searchTerm, setSearchTerm] = useState("");
+  // const [filteredData, setFilteredData] = useState(data);
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredData, setFilteredData] = useState(data);
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      });
+  });
+  // const handleSearch = (e) => {
+  //   const query = e.target.value;
+  //   setSearchTerm(query);
+  // };
 
-  const handleSearch = (e) => {
-    const query = e.target.value;
-    setSearchTerm(query);
-
-   
-  };
-
-  const handleFilter = () => {
-    const filtered = data.filter((item) => {
-      
-      return(
-        item.id.includes(searchTerm) ||item.employee.toLowerCase().includes(searchTerm.toLowerCase()));
-    });
-    setFilteredData(filtered);
-  };
+  // const handleFilter = () => {
+  //   const filtered = data.filter((item) => {
+  //     return (
+  //       item.id.includes(searchTerm) ||
+  //       item.employee.toLowerCase().includes(searchTerm.toLowerCase())
+  //     );
+  //   });
+  //   setFilteredData(filtered);
+  // };
 
   return (
     <>
@@ -39,8 +44,8 @@ function Attendance({data}) {
             <div className="flex items-center gap-3">
               <input
                 type="text"
-                value={searchTerm}
-                onChange={handleSearch}
+                // value={searchTerm}
+                // onChange={handleSearch}
                 placeholder="Search by ID or Employee"
                 className="pl-10 pr-3 py-2 rounded-md border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
@@ -52,7 +57,7 @@ function Attendance({data}) {
 
               <button
                 type="button"
-                onClick={handleFilter}
+                // onClick={handleFilter}
                 className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:opacity-90 transition"
               >
                 Advanced Filters
@@ -77,25 +82,25 @@ function Attendance({data}) {
               </thead>
 
               <tbody className="bg-white text-xl">
-                {filteredData.map((row, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
+                {data.map((item) => (
+                  <tr className="hover:bg-gray-50">
                     <td className="py-3 px-4 text-[#252C58] font-bold">
-                      {row.id}
+                      {item.id}
                     </td>
                     <td className="py-3 px-4 text-[#252C58] font-bold">
-                      {row.employee}
+                      {item.title}
                     </td>
-                    <td className="py-3 px-4 text-[#252C58]">{row.role}</td>
+                    {/* <td className="py-3 px-4 text-[#252C58]">{row.role}</td>
                     <td className="py-3 px-4 text-[#252C58]">
                       {row.department}
                     </td>
                     <td className="py-3 px-4 text-[#252C58]">{row.date}</td>
                     <td className="py-3 px-4 text-[#252C58]">{row.status}</td>
                     <td className="py-3 px-4 text-[#252C58]">{row.checkIn}</td>
-                    <td className="py-3 px-4 text-[#252C58]">{row.checkOut}</td>
-                    <td className="py-3 px-4 text-[#252C58]">
-                      {row.workHours}
-                    </td>
+                    <td className="py-3 px-4 text-[#252C58]">{row.checkOut}</td> */}
+                    {/* <td className="py-3 px-4 text-[#252C58]">
+                      {row.workHours} 
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

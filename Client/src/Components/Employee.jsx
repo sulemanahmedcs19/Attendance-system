@@ -12,7 +12,7 @@ function Employee({ empData }) {
     HomeAddress: "",
     City: "",
     Country: "",
-    PersonalEmail: "",
+    email: "",
     EContact: "",
     JobTitle: "",
     ReportingManager: "",
@@ -26,31 +26,55 @@ function Employee({ empData }) {
     setEmployeeData((oldData) => ({ ...oldData, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const allFieldsFilled = Object.values(employeeData).every(Boolean);
+    const updatedEmployeeData = { ...employeeData };
+    console.log(updatedEmployeeData);
+
+    const allFieldsFilled = Object.values(updatedEmployeeData).every(Boolean);
 
     if (allFieldsFilled) {
-      alert("Form submitted");
-      empData(employeeData);
-      setEmployeeData({
-        FName: "",
-        DOB: "",
-        CNIC: "",
-        Gender: "",
-        CNICPhoto: "",
-        HomeAddress: "",
-        City: "",
-        Country: "",
-        PersonalEmail: "",
-        EContact: "",
-        JobTitle: "",
-        ReportingManager: "",
-        DateOfJoining: "",
-        Department: "",
-        WorkType: "",
-      });
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/employee/addEmployee",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedEmployeeData),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          alert("Form submitted successfully!");
+          empData(employeeData);
+          setEmployeeData({
+            FName: "",
+            DOB: "",
+            CNIC: "",
+            Gender: "",
+            CNICPhoto: "",
+            HomeAddress: "",
+            City: "",
+            Country: "",
+            email: "",
+            EContact: "",
+            JobTitle: "",
+            ReportingManager: "",
+            DateOfJoining: "",
+            Department: "",
+            WorkType: "",
+          });
+        } else {
+          alert("Failed to submit the form. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        alert("There was an error submitting the form. Please try again.");
+      }
     } else {
       alert("Please fill in all required fields before submitting");
     }
@@ -61,15 +85,14 @@ function Employee({ empData }) {
       <Sidebar />
       <div className="ml-80 p-6 bg-gray-50 min-h-screen">
         <Header />
-
         <form onSubmit={handleSubmit}>
-          <div className="w-10% ml-8 mt-10  p-6 bg-white rounded-lg shadow-md">
+          <div className="w-10% ml-8 mt-10 p-6 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-semibold text-gray-800 mb-4">
               Basic Information
             </h1>
             <div className="flex flex-wrap gap-6 mb-6">
-              <div className="w-85 ">
-                <label className=" text-gray-700">Full Name</label>
+              <div className="w-85">
+                <label className="text-gray-700">Full Name</label>
                 <input
                   type="text"
                   value={employeeData.FName}
@@ -79,8 +102,8 @@ function Employee({ empData }) {
                 />
               </div>
 
-              <div className="w-85 ">
-                <label className=" text-gray-700">Date of Birth</label>
+              <div className="w-85">
+                <label className="text-gray-700">Date of Birth</label>
                 <input
                   type="date"
                   value={employeeData.DOB}
@@ -91,7 +114,7 @@ function Employee({ empData }) {
               </div>
 
               <div className="w-85">
-                <label className=" text-gray-700">CNIC Number</label>
+                <label className="text-gray-700">CNIC Number</label>
                 <input
                   type="number"
                   value={employeeData.CNIC}
@@ -100,8 +123,9 @@ function Employee({ empData }) {
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 />
               </div>
+
               <div className="w-85">
-                <label className=" text-gray-700">Gender</label>
+                <label className="text-gray-700">Gender</label>
                 <select
                   value={employeeData.Gender}
                   onChange={handleChange}
@@ -118,7 +142,7 @@ function Employee({ empData }) {
               </div>
 
               <div className="w-85">
-                <label className=" text-gray-700">Upload CNIC Photo</label>
+                <label className="text-gray-700">Upload CNIC Photo</label>
                 <select
                   value={employeeData.CNICPhoto}
                   onChange={handleChange}
@@ -134,12 +158,13 @@ function Employee({ empData }) {
                 </select>
               </div>
             </div>
+
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
               Contact Details
             </h2>
             <div className="flex flex-wrap gap-6 mb-6">
               <div className="w-85">
-                <label className=" text-gray-700">Home Address</label>
+                <label className="text-gray-700">Home Address</label>
                 <input
                   type="text"
                   value={employeeData.HomeAddress}
@@ -149,7 +174,7 @@ function Employee({ empData }) {
                 />
               </div>
               <div className="w-85">
-                <label className=" text-gray-700">City</label>
+                <label className="text-gray-700">City</label>
                 <input
                   type="text"
                   value={employeeData.City}
@@ -159,7 +184,7 @@ function Employee({ empData }) {
                 />
               </div>
               <div className="w-85">
-                <label className=" text-gray-700">Country</label>
+                <label className="text-gray-700">Country</label>
                 <input
                   type="text"
                   value={employeeData.Country}
@@ -169,19 +194,19 @@ function Employee({ empData }) {
                 />
               </div>
               <div className="w-85">
-                <label className=" text-gray-700">Personal Email</label>
+                <label className="text-gray-700">Personal Email</label>
                 <input
                   type="email"
-                  value={employeeData.PersonalEmail}
+                  value={employeeData.email}
                   onChange={handleChange}
-                  name="PersonalEmail"
+                  name="email"
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 />
               </div>
               <div className="w-85">
-                <label className=" text-gray-700">Emergency Contact</label>
+                <label className="text-gray-700">Emergency Contact</label>
                 <input
-                  type="number"
+                  type="text"
                   value={employeeData.EContact}
                   onChange={handleChange}
                   name="EContact"
@@ -193,10 +218,9 @@ function Employee({ empData }) {
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
               Roles & Work Details
             </h2>
-
             <div className="flex flex-wrap gap-6 mb-6">
               <div className="w-85">
-                <label className=" text-gray-700">Job Title</label>
+                <label className="text-gray-700">Job Title</label>
                 <input
                   type="text"
                   value={employeeData.JobTitle}
@@ -206,7 +230,7 @@ function Employee({ empData }) {
                 />
               </div>
               <div className="w-85">
-                <label className=" text-gray-700">Reporting Manager</label>
+                <label className="text-gray-700">Reporting Manager</label>
                 <input
                   type="text"
                   value={employeeData.ReportingManager}
@@ -216,7 +240,7 @@ function Employee({ empData }) {
                 />
               </div>
               <div className="w-85">
-                <label className=" text-gray-700">Date of Joining</label>
+                <label className="text-gray-700">Date of Joining</label>
                 <input
                   type="date"
                   value={employeeData.DateOfJoining}
@@ -226,7 +250,7 @@ function Employee({ empData }) {
                 />
               </div>
               <div className="w-85">
-                <label className=" text-gray-700">Department</label>
+                <label className="text-gray-700">Department</label>
                 <input
                   type="text"
                   value={employeeData.Department}
@@ -236,33 +260,25 @@ function Employee({ empData }) {
                 />
               </div>
               <div className="w-85">
-                <label className=" text-gray-700">Work Type</label>
-                <select
+                <label className="text-gray-700">Work Type</label>
+                <input
+                  type="text"
                   value={employeeData.WorkType}
                   onChange={handleChange}
                   name="WorkType"
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-                >
-                  <option value="Select The Option">
-                    --Select The Option--
-                  </option>
-                  <option value="Onsite">Onsite</option>
-                  <option value="Remote">Remote</option>
-                  <option value="Hybrid">Hybrid</option>
-                </select>
+                />
               </div>
-
-              <button
-                type="submit"
-                className=" w-40 bg-gradient-to-r from-purple-500 to-pink-500 text-white  rounded-md text-sm font-medium hover:opacity-90 transition"
-              >
-                save
-              </button>
             </div>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-6 py-2 rounded-md mt-4"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>
-      <div></div>
     </>
   );
 }
