@@ -8,19 +8,13 @@ import timeo from "../assets/card/time-out.png";
 import Graph from "./Graph";
 
 function Card({ data, attendance }) {
-  console.log(data);
-
-  let chkin;
-  let chekout;
-  let totalemp = 15;
-  let p = 5;
-  let a = totalemp - p;
+  const te = Array.isArray(data) ? data.length : 0;
 
   // const totalEmployees = Array.isArray(data) ? data.length : 0;
 
   // te 0 zyada he , show krwado te
   // warna 0 hi rehne do
-  let te = data.data.length;
+
   // console.log(te);
 
   // if (te != zero)
@@ -88,7 +82,7 @@ function Card({ data, attendance }) {
             <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center font-semibold text-sm">
               <div className="flex flex-col items-center">
                 <div className="flex items-center">
-                  <p className="text-4xl font-bold">{a}</p>
+                  <p className="text-4xl font-bold"></p>
                   <img src={weather} className="w-5 h-5 ml-20" />
                 </div>
                 <p className="text-lg text-[#252C58] p-3">Absent</p>
@@ -124,7 +118,7 @@ function Card({ data, attendance }) {
             <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center font-semibold text-sm">
               <div className="flex flex-col items-center">
                 <div className="flex items-center">
-                  <p className="text-4xl font-bold">{p}</p>
+                  <p className="text-4xl font-bold"></p>
                   <img src={date} className="w-5 h-5 ml-20" />
                 </div>
                 <p className="text-lg text-[#252C58] p-3">Pressent</p>
@@ -144,7 +138,7 @@ function Card({ data, attendance }) {
           <div className="flex flex-col gap-4 w-[40%]">
             <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center font-semibold text-sm">
               <div className="flex flex-col items-center">
-                <p className="text-4xl font-bold">{p}</p>
+                <p className="text-4xl font-bold"></p>
                 <p className="text-lg text-[#252C58]">Check-in</p>
                 <p className="text-[#252C58] mt-2">
                   +3% Increase than yesterday
