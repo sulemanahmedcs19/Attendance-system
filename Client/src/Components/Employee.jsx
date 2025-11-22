@@ -37,7 +37,7 @@ function Employee({ empData }) {
     if (allFieldsFilled) {
       try {
         const response = await fetch(
-          "http://localhost:3000/api/employee/addEmployee",
+          "https://attendance-system-backend-n5c2.onrender.com/api/employee/addEmployee",
           {
             method: "POST",
             headers: {
