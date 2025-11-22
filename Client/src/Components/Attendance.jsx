@@ -7,7 +7,7 @@ function Attendance() {
 
   useEffect(() => {
     // Replace this URL with your actual backend API endpoint
-    fetch("http://localhost:3000/api/attendance/getAllAttendance", {
+    fetch("https://attendance-system-backend-n5c2.onrender.com/api/attendance/getAllAttendance", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
