@@ -4,6 +4,8 @@ import Sidebar from "./Sidebar";
 
 function Attendance() {
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
+  const [dateFilter, setDateFilter] = useState("");
 
   useEffect(() => {
     fetch(
@@ -28,6 +30,20 @@ function Attendance() {
       });
   }, []);
 
+  const filteredData = data.filter((item, index) => {
+    const serialId = (index + 1).toString();
+    const itemDate = new Date(item.CheckIn).toISOString().split("T")[0];
+
+    const matchSearch =
+      serialId.includes(search) ||
+      (item.name && item.name.toLowerCase().includes(search.toLowerCase())) ||
+      (item.email && item.email.toLowerCase().includes(search.toLowerCase()));
+
+    const matchDate = dateFilter ? itemDate === dateFilter : true;
+
+    return matchSearch && matchDate;
+  });
+
   return (
     <>
       <Sidebar />
@@ -43,21 +59,18 @@ function Attendance() {
             <div className="flex items-center gap-3">
               <input
                 type="text"
-                placeholder="Search by ID or Employee"
+                placeholder="Search by Name / ID / Email"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 className="pl-10 pr-3 py-2 rounded-md border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
 
               <input
                 type="date"
+                value={dateFilter}
+                onChange={(e) => setDateFilter(e.target.value)}
                 className="border border-gray-300 rounded-md text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
-
-              <button
-                type="button"
-                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:opacity-90 transition"
-              >
-                Advanced Filters
-              </button>
             </div>
           </div>
 
@@ -76,27 +89,35 @@ function Attendance() {
               </thead>
 
               <tbody className="bg-white text-xl">
-                {data.length > 0 ? (
-                  data.map((item) => (
+                {filteredData.length > 0 ? (
+                  filteredData.map((item, index) => (
                     <tr key={item._id} className="hover:bg-gray-50">
+                      {/* SERIAL NUMBER */}
                       <td className="py-3 px-4 text-[#252C58] font-bold">
-                        {item._id}
+                        {index + 1}
                       </td>
+
+                      {/* EMPLOYEE NAME */}
                       <td className="py-3 px-4 text-[#252C58] font-bold">
-                        {item.email}
+                        {item.name ? item.name : item.email}
                       </td>
+
                       <td className="py-3 px-4 text-[#252C58]">
                         {new Date(item.CheckIn).toLocaleDateString()}
                       </td>
+
                       <td className="py-3 px-4 text-[#252C58]">
                         {item.Status}
                       </td>
+
                       <td className="py-3 px-4 text-[#252C58]">
                         {item.Remarks}
                       </td>
+
                       <td className="py-3 px-4 text-[#252C58]">
                         {new Date(item.CheckIn).toLocaleTimeString()}
                       </td>
+
                       <td className="py-3 px-4 text-[#252C58]">
                         {item.CheckOut
                           ? new Date(item.CheckOut).toLocaleTimeString()
