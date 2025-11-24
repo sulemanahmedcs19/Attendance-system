@@ -53,12 +53,8 @@ const EmployeeList = () => {
       const id = selectedEmployee._id;
 
       const response = await fetch(
-<<<<<<< HEAD
         "https://attendance-system-backend-n5c2.onrender.com/api/employee/updateEmployee/" +
           id,
-=======
-        "https://attendance-system-backend-n5c2.onrender.com/api/employee/updateEmployee/" + id,
->>>>>>> 8c5556d7439239c57845b77d8043c0b6f0e50b6e
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -96,12 +92,9 @@ const EmployeeList = () => {
   const handleDeleteClick = async (id) => {
     try {
       const response = await fetch(
-<<<<<<< HEAD
         `https://attendance-system-backend-n5c2.onrender.com/api/employee/deleteEmployee/` +
           id,
-=======
-        `https://attendance-system-backend-n5c2.onrender.com/api/employee/deleteEmployee/` + id,
->>>>>>> 8c5556d7439239c57845b77d8043c0b6f0e50b6e
+
         {
           method: "DELETE",
         }
