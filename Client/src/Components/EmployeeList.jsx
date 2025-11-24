@@ -15,7 +15,7 @@ const EmployeeList = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       const response = await fetch(
-        "http://localhost:3000/api/employee/getAllEmployees"
+        "https://attendance-system-backend-n5c2.onrender.com/api/employee/getAllEmployees"
       );
       const result = await response.json();
       setEmployees(result);
@@ -53,7 +53,8 @@ const EmployeeList = () => {
       const id = selectedEmployee._id;
 
       const response = await fetch(
-        "http://localhost:3000/api/employee/updateEmployee/" + id,
+        "https://attendance-system-backend-n5c2.onrender.com/api/employee/updateEmployee/" +
+          id,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -91,7 +92,8 @@ const EmployeeList = () => {
   const handleDeleteClick = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/employee/deleteEmployee/` + id,
+        `https://attendance-system-backend-n5c2.onrender.com/api/employee/deleteEmployee/` +
+          id,
         {
           method: "DELETE",
         }
