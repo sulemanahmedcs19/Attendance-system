@@ -7,6 +7,7 @@ function Attendance() {
 
   useEffect(() => {
     // Replace this URL with your actual backend API endpoint
+<<<<<<< HEAD
     fetch(
       "https://attendance-system-backend-n5c2.onrender.com/api/attendance/getAllAttendance",
       {
@@ -16,6 +17,16 @@ function Attendance() {
         },
       }
     )
+=======
+    fetch("https://attendance-system-backend-n5c2.onrender.com/api/attendance/getAllAttendance", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // Add your JWT token if your API is protected
+        // "Authorization": `Bearer ${localStorage.getItem("token")}`
+      },
+    })
+>>>>>>> 8c5556d7439239c57845b77d8043c0b6f0e50b6e
       .then((response) => response.json())
       .then((result) => {
         if (result.attendance) {
