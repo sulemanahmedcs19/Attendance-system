@@ -7,6 +7,21 @@ function Attendance() {
   const [search, setSearch] = useState("");
   const [dateFilter, setDateFilter] = useState("");
 
+  // FIXED: 12-hour format without timezone shift
+  const formatTo12Hour = (isoTime) => {
+    if (!isoTime) return "-";
+
+    const timePart = isoTime.split("T")[1].split(".")[0]; // HH:mm:ss
+    let [hour, minute] = timePart.split(":");
+
+    hour = parseInt(hour);
+
+    const ampm = hour >= 12 ? "PM" : "AM";
+    hour = hour % 12 || 12;
+
+    return `${hour}:${minute} ${ampm}`;
+  };
+
   useEffect(() => {
     fetch(
       "https://attendance-system-backend-n5c2.onrender.com/api/attendance/getAllAttendance",
@@ -92,14 +107,12 @@ function Attendance() {
                 {filteredData.length > 0 ? (
                   filteredData.map((item, index) => (
                     <tr key={item._id} className="hover:bg-gray-50">
-                      {/* SERIAL NUMBER */}
                       <td className="py-3 px-4 text-[#252C58] font-bold">
                         {index + 1}
                       </td>
 
-                      {/* EMPLOYEE NAME */}
                       <td className="py-3 px-4 text-[#252C58] font-bold">
-                        {item.name}
+                        {item.employeeName}
                       </td>
 
                       <td className="py-3 px-4 text-[#252C58]">
@@ -114,14 +127,13 @@ function Attendance() {
                         {item.Remarks}
                       </td>
 
+                      {/* Sahi 12-hour format */}
                       <td className="py-3 px-4 text-[#252C58]">
-                        {new Date(item.CheckIn).toLocaleTimeString()}
+                        {formatTo12Hour(item.CheckIn)}
                       </td>
 
                       <td className="py-3 px-4 text-[#252C58]">
-                        {item.CheckOut
-                          ? new Date(item.CheckOut).toLocaleTimeString()
-                          : "-"}
+                        {formatTo12Hour(item.CheckOut)}
                       </td>
                     </tr>
                   ))
