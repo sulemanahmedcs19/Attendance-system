@@ -99,7 +99,7 @@ function Attendance() {
 
                       {/* EMPLOYEE NAME */}
                       <td className="py-3 px-4 text-[#252C58] font-bold">
-                        {item.name ? item.name : item.email}
+                        {item.name}
                       </td>
 
                       <td className="py-3 px-4 text-[#252C58]">
