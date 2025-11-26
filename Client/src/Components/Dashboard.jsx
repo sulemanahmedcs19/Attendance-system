@@ -5,12 +5,24 @@ import Graph from "./Graph";
 
 function Dashboard({ data, attendance }) {
   return (
-    <div className="App flex bg-gray-100">
+    <div className="w-full h-screen bg-gray-100 flex">
+      {/* FIXED SIDEBAR */}
       <Sidebar />
-      <div className="ml-[20%] w-[80%] flex flex-col mt-[2%]">
+
+      {/* MAIN CONTENT AREA */}
+      <div className="flex flex-col ml-[250px] w-[calc(100%-250px)] px-6 py-4">
+        {/* HEADER FULL WIDTH */}
         <Header />
-        <Card data={data} attendance={attendance} />
-        <Graph attendance={attendance} />
+
+        {/* SPACE BELOW HEADER */}
+        <div className="mt-6">
+          <Card data={data} attendance={attendance} />
+        </div>
+
+        {/* GRAPH SECTION */}
+        <div className="mt-6">
+          <Graph attendance={attendance} />
+        </div>
       </div>
     </div>
   );

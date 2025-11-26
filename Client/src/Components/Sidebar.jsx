@@ -6,9 +6,11 @@ import Logout from "../assets/sidebar/Logout.png";
 import Notification from "../assets/sidebar/Notification.png";
 import Setting from "../assets/sidebar/Setting.png";
 import profileLogo from "../assets/sidebar/profile.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Sidebar() {
+  const location = useLocation();
+
   const menu = [
     { name: "Dashboard", link: "/Dashboard", icon: dashboard, type: "link" },
     { name: "Leaves", icon: Leaves, type: "button" },
@@ -26,31 +28,60 @@ function Sidebar() {
   ];
 
   return (
-    <div className="sidebar fixed top-0 left-0 w-[250px] h-[100vh] bg-white shadow-md">
-      <div className="text-logo flex w-[50%] justify-center items-center mt-25 ml-20">
-        <h1 className="text-black font-bold text-xl mb-1">ALPHA</h1>
-        <img src={profileLogo} alt="logo" className="w-[40px] h-[40px] ml-1" />
+    <div className="fixed top-0 left-0 w-[260px] h-screen bg-white shadow-xl border-r border-gray-200 flex flex-col py-8">
+      {/* LOGO AREA */}
+      <div className="flex items-center justify-center mb-10">
+        <div className="flex items-center gap-2">
+          <h1 className="text-2xl font-extrabold text-[#6a1b9a] tracking-widest">
+            ALPHA
+          </h1>
+          <img
+            src={profileLogo}
+            alt="logo"
+            className="w-10 h-10 rounded-full shadow-md"
+          />
+        </div>
       </div>
 
-      <ul className="w-full flex flex-col items-start justify-center gap-10 p-15 text-lg font-semibold">
-        {menu.map((item, index) => (
-          <li key={index} className="w-full h-[40px] flex items-center pl-4">
-            {item.type === "link" ? (
-              <Link
-                to={item.link}
-                className="flex items-center gap-3 w-full hover:text-[#b52fc8] cursor-pointer"
-              >
-                <img src={item.icon} className="w-5 h-5" alt={item.name} />
-                {item.name}
-              </Link>
-            ) : (
-              <button className="flex items-center gap-3 w-full hover:text-[#b52fc8] cursor-pointer">
-                <img src={item.icon} className="w-5 h-5" alt={item.name} />
-                {item.name}
-              </button>
-            )}
-          </li>
-        ))}
+      {/* MENU ITEMS */}
+      <ul className="flex flex-col gap-3 px-4">
+        {menu.map((item, index) => {
+          const isActive = location.pathname === item.link;
+
+          return (
+            <li key={index}>
+              {item.type === "link" ? (
+                <Link
+                  to={item.link}
+                  className={`
+                    flex items-center gap-4 w-full px-4 py-3 rounded-lg cursor-pointer 
+                    transition-all duration-300
+                    ${
+                      isActive
+                        ? "bg-purple-100 text-purple-700 font-bold shadow-inner"
+                        : "text-gray-700"
+                    }
+                    hover:bg-purple-50 hover:text-purple-700
+                  `}
+                >
+                  <img src={item.icon} className="w-5 h-5 opacity-80" />
+                  {item.name}
+                </Link>
+              ) : (
+                <button
+                  className="
+                    flex items-center gap-4 w-full px-4 py-3 rounded-lg cursor-pointer 
+                    text-gray-700 transition-all duration-300
+                    hover:bg-purple-50 hover:text-purple-700
+                  "
+                >
+                  <img src={item.icon} className="w-5 h-5 opacity-80" />
+                  {item.name}
+                </button>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

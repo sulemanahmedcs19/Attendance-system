@@ -11,7 +11,7 @@ const EmployeeList = () => {
   const [formData, setFormData] = useState({});
   const [totalEmployees, setTotalEmployees] = useState(0);
 
-  // Data Fetch
+  // Fetch Employees
   useEffect(() => {
     const fetchEmployees = async () => {
       const response = await fetch(
@@ -25,7 +25,7 @@ const EmployeeList = () => {
     fetchEmployees();
   }, []);
 
-  // Search
+  // Search Function
   const handleSearchClick = () => {
     const filtered = employees.filter((employee) =>
       employee.FName?.toLowerCase().includes(searchTerm.toLowerCase())
@@ -33,19 +33,22 @@ const EmployeeList = () => {
     setFilteredData(filtered);
   };
 
-  //  Update Click
+  // Update Click
   const handleUpdateClick = (employee) => {
     setSelectedEmployee(employee);
     setFormData(employee);
     setIsModalOpen(true);
   };
 
-  //  Input Change
-  function handleInputChange(e) {
-    setFormData({ name: e.target.value });
-  }
+  // Form Input Change
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  //Update Employee
+  // Update Submit
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
 
@@ -53,8 +56,7 @@ const EmployeeList = () => {
       const id = selectedEmployee._id;
 
       const response = await fetch(
-        "https://attendance-system-backend-n5c2.onrender.com/api/employee/updateEmployee/" +
-          id,
+        `https://attendance-system-backend-n5c2.onrender.com/api/employee/updateEmployee/${id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -66,16 +68,12 @@ const EmployeeList = () => {
         alert("Employee updated successfully");
         setIsModalOpen(false);
 
-        const updatedList = employees.map((emp) => {
-          if (emp._id == id) {
-            return { ...emp, ...formData };
-          }
-          return emp;
-        });
+        const updatedList = employees.map((emp) =>
+          emp._id === id ? { ...emp, ...formData } : emp
+        );
 
         setEmployees(updatedList);
         setFilteredData(updatedList);
-        setTotalEmployees(result.length);
       } else {
         alert("Update failed");
       }
@@ -89,20 +87,16 @@ const EmployeeList = () => {
     setIsModalOpen(false);
     setSelectedEmployee(null);
   };
+
   const handleDeleteClick = async (id) => {
     try {
       const response = await fetch(
-        `https://attendance-system-backend-n5c2.onrender.com/api/employee/deleteEmployee/` +
-          id,
-
-        {
-          method: "DELETE",
-        }
+        `https://attendance-system-backend-n5c2.onrender.com/api/employee/deleteEmployee/${id}`,
+        { method: "DELETE" }
       );
 
       if (response.ok) {
-        alert("Delete employee data successfully");
-
+        alert("Employee deleted successfully");
         const updatedData = employees.filter((emp) => emp._id !== id);
         setEmployees(updatedData);
         setFilteredData(updatedData);
@@ -111,49 +105,52 @@ const EmployeeList = () => {
       alert("Unable to delete employee.");
     }
   };
+
   return (
     <>
       <Sidebar />
-      <div className="ml-60 mt-20 p-4 bg-white rounded-xl shadow-md w-[85%]">
+
+      <div className="ml-60 mt-20 p-6 bg-white shadow-xl rounded-xl w-[85%]">
         <Header />
 
-        {/*  Search Bar */}
-        <div className="flex items-center justify-between mb-6 mt-20 px-4 py-3 bg-white rounded-md shadow">
-          <div className="flex items-center gap-3">
+        {/* Search Bar */}
+        <div className="flex items-center justify-between mb-6 mt-10 px-4 py-3 bg-purple-50 rounded-lg shadow">
+          <div className="flex items-center gap-3 w-full">
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search by Employee Name..."
-              className="pl-10 pr-3 py-2 rounded-md border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholder="Search Employee..."
+              className="w-full pl-4 pr-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
             <button
               type="button"
               onClick={handleSearchClick}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:opacity-90 transition"
+              className="bg-purple-600 text-white px-5 py-2 rounded-md hover:bg-purple-700 transition"
             >
               Search
             </button>
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Employee Table */}
+        <div className="overflow-x-auto rounded-lg border shadow-sm">
           <table className="w-full text-sm">
-            <thead className="bg-purple-50 text-gray-700">
+            <thead className="bg-purple-100 text-gray-700">
               <tr>
                 <th className="py-3 px-4 text-left">Full Name</th>
                 <th className="py-3 px-4 text-left">DOB</th>
                 <th className="py-3 px-4 text-left">CNIC</th>
                 <th className="py-3 px-4 text-left">Gender</th>
-                <th className="py-3 px-4 text-left">CNIC Photo</th>
-                <th className="py-3 px-4 text-left">Home Address</th>
+                <th className="py-3 px-4 text-left">Photo</th>
+                <th className="py-3 px-4 text-left">Address</th>
                 <th className="py-3 px-4 text-left">City</th>
                 <th className="py-3 px-4 text-left">Country</th>
                 <th className="py-3 px-4 text-left">Email</th>
-                <th className="py-3 px-4 text-left">Emergency Contact</th>
-                <th className="py-3 px-4 text-left">Job Title</th>
-                <th className="py-3 px-4 text-left">Reporting Manager</th>
-                <th className="py-3 px-4 text-left">Date of Joining</th>
+                <th className="py-3 px-4 text-left">Emergency</th>
+                <th className="py-3 px-4 text-left">Title</th>
+                <th className="py-3 px-4 text-left">Manager</th>
+                <th className="py-3 px-4 text-left">Joining</th>
                 <th className="py-3 px-4 text-left">Department</th>
                 <th className="py-3 px-4 text-left">Work Type</th>
                 <th className="py-3 px-4 text-center">Actions</th>
@@ -161,17 +158,18 @@ const EmployeeList = () => {
             </thead>
 
             <tbody>
-              {filteredData.length > 0 ? (
-                filteredData.map((emp) => (
+              {filteredData.length ? (
+                filteredData.map((emp, index) => (
                   <tr
                     key={emp._id}
-                    className="hover:bg-purple-50 transition border-b border-gray-100"
+                    className={`transition ${
+                      index % 2 === 0 ? "bg-white" : "bg-purple-50"
+                    } hover:bg-purple-100`}
                   >
                     <td className="py-2 px-4">{emp.FName}</td>
                     <td className="py-2 px-4">{emp.DOB}</td>
                     <td className="py-2 px-4">{emp.CNIC}</td>
                     <td className="py-2 px-4">{emp.Gender}</td>
-
                     <td className="py-2 px-4">{emp.CNICPhoto}</td>
                     <td className="py-2 px-4">{emp.HomeAddress}</td>
                     <td className="py-2 px-4">{emp.City}</td>
@@ -183,16 +181,18 @@ const EmployeeList = () => {
                     <td className="py-2 px-4">{emp.DateOfJoining}</td>
                     <td className="py-2 px-4">{emp.Department}</td>
                     <td className="py-2 px-4">{emp.WorkType}</td>
-                    <td className="py-2 px-4 text-center">
+
+                    <td className="py-2 px-4 text-center flex gap-2 justify-center">
                       <button
                         onClick={() => handleUpdateClick(emp)}
-                        className="bg-purple-500 text-white px-3 py-1 rounded text-xs hover:bg-purple-600 mr-2"
+                        className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 text-xs"
                       >
                         Update
                       </button>
+
                       <button
                         onClick={() => handleDeleteClick(emp._id)}
-                        className="bg-purple-500 text-white px-3 py-1 rounded text-xs hover:bg-purple-500"
+                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-xs"
                       >
                         Delete
                       </button>
@@ -202,7 +202,7 @@ const EmployeeList = () => {
               ) : (
                 <tr>
                   <td colSpan="16" className="text-center py-4 text-gray-500">
-                    No employee found.
+                    No Employee Found
                   </td>
                 </tr>
               )}
@@ -211,27 +211,28 @@ const EmployeeList = () => {
         </div>
       </div>
 
+      {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <form
             onSubmit={handleUpdateSubmit}
-            className="bg-white p-6  shadow-lg w-[750px] max-h-[80vh] "
+            className="bg-white p-6 rounded-lg shadow-xl w-[750px] max-h-[80vh] overflow-y-auto"
           >
             <h2 className="text-2xl font-semibold mb-6 text-center text-purple-600">
-              Edit Employee Detail
+              Edit Employee Details
             </h2>
 
             <div className="grid grid-cols-2 gap-4">
               {[
                 ["FName", "Full Name"],
                 ["DOB", "Date of Birth"],
-                ["CNIC", "CNIC #"],
+                ["CNIC", "CNIC Number"],
                 ["Gender", "Gender"],
                 ["CNICPhoto", "CNIC Photo URL"],
                 ["HomeAddress", "Home Address"],
                 ["City", "City"],
                 ["Country", "Country"],
-                ["email", "Personal Email"],
+                ["email", "Email"],
                 ["EContact", "Emergency Contact"],
                 ["JobTitle", "Job Title"],
                 ["ReportingManager", "Reporting Manager"],
@@ -239,32 +240,30 @@ const EmployeeList = () => {
                 ["Department", "Department"],
                 ["WorkType", "Work Type"],
               ].map(([key, label]) => (
-                <div key={key} className="flex flex-col">
-                  <label className="text-sm font-semibold text-gray-700 mb-1">
-                    {label}
-                  </label>
+                <div key={key}>
+                  <label className="text-sm text-gray-600">{label}</label>
                   <input
                     name={key}
-                    value={formData[key]}
+                    value={formData[key] || ""}
                     onChange={handleInputChange}
-                    placeholder={label}
-                    className="p-2 border rounded focus:ring-2 focus:ring-purple-400"
+                    className="w-full p-2 border rounded mt-1 focus:ring-2 focus:ring-purple-500"
                   />
                 </div>
               ))}
             </div>
 
-            <div className="flex justify-end mt-6 gap-3">
+            <div className="flex justify-end gap-3 mt-5">
               <button
-                type="button"
                 onClick={handleCloseModal}
-                className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+                type="button"
+                className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
               >
                 Cancel
               </button>
+
               <button
                 type="submit"
-                className="bg-purple-600 text-white px-5 py-2 rounded hover:bg-purple-700"
+                className="px-5 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
               >
                 Update
               </button>
