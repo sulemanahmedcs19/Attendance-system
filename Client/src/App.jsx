@@ -1,43 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./Components/Dashboard";
 import Employee from "./Components/Employee";
-import Attendance from "./Components/Attendance";
 import EmployeeList from "./Components/EmployeeList";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Attendancedata from "./Attendancedata";
-import Login from "./Components/login"; // Capital L, sahi path
+import Attendance from "./Components/Attendance";
+import Login from "./Components/Login";
 
 function App() {
-  const attendanceData = Attendancedata();
-
   const [employees, setEmployees] = useState([]);
+  const [attendanceData, setAttendanceData] = useState([]);
 
-  function getData(data) {
-    setEmployees((prevEmployees) => [...prevEmployees, data]);
+  // Fetch attendance data once
+  useEffect(() => {
+    fetch(
+      "https://attendance-system-backend-n5c2.onrender.com/api/attendance/getAllAttendance"
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.attendance) setAttendanceData(result.attendance);
+      })
+      .catch((err) => console.error("Attendance fetch error:", err));
+  }, []);
+
+  // Callback from Employee.jsx to add new employee
+  function addEmployee(data) {
+    setEmployees((prev) => [...prev, data]);
   }
 
   return (
     <BrowserRouter>
       <Routes>
-        {/* Default route - Login */}
         <Route path="/" element={<Login />} />
-
-        {/* Dashboard */}
         <Route
           path="/Dashboard"
-          element={<Dashboard data={employees} attendance={attendanceData} />}
+          element={
+            <Dashboard employees={employees} attendance={attendanceData} />
+          }
         />
-
-        {/* Employee */}
-        <Route path="/Employee" element={<Employee empData={getData} />} />
-
-        {/* Employee List */}
+        <Route path="/Employee" element={<Employee empData={addEmployee} />} />
         <Route
           path="/EmployeeList"
           element={<EmployeeList data={employees} />}
         />
-
-        {/* Attendance */}
         <Route
           path="/Attendance"
           element={<Attendance data={attendanceData} />}
