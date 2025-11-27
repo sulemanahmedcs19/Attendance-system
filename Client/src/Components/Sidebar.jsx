@@ -6,10 +6,12 @@ import Logout from "../assets/sidebar/Logout.png";
 import Notification from "../assets/sidebar/Notification.png";
 import Setting from "../assets/sidebar/Setting.png";
 import profileLogo from "../assets/sidebar/profile.png";
-import { Link, useLocation } from "react-router-dom";
+
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate(); // <-- added for navigation
 
   const menu = [
     { name: "Dashboard", link: "/Dashboard", icon: dashboard, type: "link" },
@@ -26,6 +28,16 @@ function Sidebar() {
     { name: "Settings", icon: Setting, type: "button" },
     { name: "Logout", icon: Logout, type: "button" },
   ];
+
+  const handleButtonClick = (item) => {
+    if (item.name === "Logout") {
+      // Optional: clear session / localStorage here
+      // localStorage.removeItem("token");
+      navigate("/"); // redirect to login page
+    } else {
+      alert(`${item.name} button clicked!`); // for demo
+    }
+  };
 
   return (
     <div className="fixed top-0 left-0 w-[260px] h-screen bg-white shadow-xl border-r border-gray-200 flex flex-col py-8">
@@ -69,6 +81,7 @@ function Sidebar() {
                 </Link>
               ) : (
                 <button
+                  onClick={() => handleButtonClick(item)}
                   className="
                     flex items-center gap-4 w-full px-4 py-3 rounded-lg cursor-pointer 
                     text-gray-700 transition-all duration-300

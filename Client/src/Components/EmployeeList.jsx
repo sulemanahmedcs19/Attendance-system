@@ -110,7 +110,7 @@ const EmployeeList = () => {
     <>
       <Sidebar />
 
-      <div className="ml-60 mt-20 p-6 bg-white shadow-xl rounded-xl w-[85%]">
+      <div className="ml-80  p-6 bg-white rounded-2xl shadow-xl w-[75%] transition">
         <Header />
 
         {/* Search Bar */}

@@ -5,13 +5,10 @@ import Attendance from "./Components/Attendance";
 import EmployeeList from "./Components/EmployeeList";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Attendancedata from "./Attendancedata";
+import Login from "./Components/login"; // Capital L, sahi path
 
 function App() {
   const attendanceData = Attendancedata();
-
-  // function useState(){
-  //   return [variable,function]
-  // }
 
   const [employees, setEmployees] = useState([]);
 
@@ -22,23 +19,25 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={<Dashboard data={employees} attendance={attendanceData} />}
-        />
+        {/* Default route - Login */}
+        <Route path="/" element={<Login />} />
 
-        <Route path="/Employee" element={<Employee empData={getData} />} />
-
-        <Route
-          path="/EmployeeList"
-          element={<EmployeeList data={employees} />}
-        />
-
+        {/* Dashboard */}
         <Route
           path="/Dashboard"
           element={<Dashboard data={employees} attendance={attendanceData} />}
         />
 
+        {/* Employee */}
+        <Route path="/Employee" element={<Employee empData={getData} />} />
+
+        {/* Employee List */}
+        <Route
+          path="/EmployeeList"
+          element={<EmployeeList data={employees} />}
+        />
+
+        {/* Attendance */}
         <Route
           path="/Attendance"
           element={<Attendance data={attendanceData} />}

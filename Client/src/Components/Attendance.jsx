@@ -54,7 +54,7 @@ function Attendance() {
     <>
       <Sidebar />
 
-      <div className="ml-80 mt-10 p-6 bg-white rounded-2xl shadow-xl w-[75%] transition">
+      <div className="ml-80  p-6 bg-white rounded-2xl shadow-xl w-[75%] transition">
         <Header />
 
         {/* Filter Section */}

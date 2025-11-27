@@ -83,7 +83,7 @@ function Employee({ empData }) {
   return (
     <>
       <Sidebar />
-      <div className="ml-80 p-6 bg-gray-50 min-h-screen">
+      <div className="ml-80  p-6 bg-white rounded-2xl shadow-xl w-[75%] transition">
         <Header />
         <form onSubmit={handleSubmit}>
           <div className="w-10% ml-8 mt-10 p-6 bg-white rounded-lg shadow-md">
