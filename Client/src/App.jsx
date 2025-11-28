@@ -4,7 +4,7 @@ import Dashboard from "./Components/Dashboard";
 import Employee from "./Components/Employee";
 import EmployeeList from "./Components/EmployeeList";
 import Attendance from "./Components/Attendance";
-import Login from "./Components/Login";
+import Login from "./Components/login";
 
 function App() {
   const [employees, setEmployees] = useState([]);
