@@ -5,6 +5,10 @@ import logo from "../assets/roots.jpeg";
 function Login() {
   const navigate = useNavigate();
   const [slideDown, setSlideDown] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // New state
 
   useEffect(() => {
     const timer = setTimeout(() => setSlideDown(true), 100);
@@ -12,7 +16,15 @@ function Login() {
   }, []);
 
   function handleLogin() {
-    navigate("/Dashboard");
+    if (
+      username === "admin@therootsdigital.com" &&
+      password === "Immadkhan123!@#"
+    ) {
+      setError("");
+      navigate("/Dashboard");
+    } else {
+      setError("Invalid username or password");
+    }
   }
 
   return (
@@ -34,7 +46,6 @@ function Login() {
         </h1>
       </div>
 
-      {/* Inline CSS for slide-in */}
       <style>
         {`
           @keyframes slideInTop {
@@ -44,7 +55,7 @@ function Login() {
         `}
       </style>
 
-      {/* 🔹 Updated & Bigger Login Card */}
+      {/* 🔹 Login Card */}
       <div
         className={`
           relative w-full max-w-lg p-14 rounded-3xl
@@ -57,7 +68,7 @@ function Login() {
           }
         `}
       >
-        {/* 🔵 Bigger Bouncing Logo */}
+        {/* 🔵 Logo */}
         <div
           className="
             w-28 h-28 mx-auto rounded-full bg-white
@@ -68,13 +79,8 @@ function Login() {
           <img src={logo} alt="logo" className="w-20 h-20 object-contain" />
         </div>
 
-        {/* ⭐ Attendance App Title */}
-        <h2 className="text-4xl font-bold mt-6 text-purple-700">
-          Attendance App
-        </h2>
-
         {/* Login Title */}
-        <h3 className="text-3xl font-bold mt-4 mb-8 text-gray-800">
+        <h3 className="text-3xl font-bold mt-8 mb-4 text-gray-800">
           Admin Login
         </h3>
 
@@ -82,25 +88,41 @@ function Login() {
         <input
           type="text"
           placeholder="Enter Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           className="
-            w-full py-4 mb-6 px-4 rounded-lg bg-white border border-gray-300
+            w-full py-4 mb-4 px-4 rounded-lg bg-white border border-gray-300
             placeholder-gray-400 text-gray-800 shadow-md
             focus:outline-none focus:ring-2 focus:ring-purple-300
             transition-all duration-300
           "
         />
 
-        {/* Password Input */}
-        <input
-          type="password"
-          placeholder="Enter Password"
-          className="
-            w-full py-4 mb-6 px-4 rounded-lg bg-white border border-gray-300
-            placeholder-gray-400 text-gray-800 shadow-md
-            focus:outline-none focus:ring-2 focus:ring-purple-300
-            transition-all duration-300
-          "
-        />
+        {/* Password Input with Show/Hide */}
+        <div className="relative w-full mb-4">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="
+              w-full py-4 px-4 rounded-lg bg-white border border-gray-300
+              placeholder-gray-400 text-gray-800 shadow-md
+              focus:outline-none focus:ring-2 focus:ring-purple-300
+              transition-all duration-300
+            "
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium"
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
+
+        {/* Error Message */}
+        {error && <p className="text-red-500 mb-4 font-medium">{error}</p>}
 
         {/* Login Button */}
         <button
