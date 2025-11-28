@@ -10,17 +10,25 @@ const EmployeeList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({});
   const [totalEmployees, setTotalEmployees] = useState(0);
+  const [isLoading, setIsLoading] = useState(true); // Loader state
 
   // Fetch Employees
   useEffect(() => {
     const fetchEmployees = async () => {
-      const response = await fetch(
-        "https://attendance-system-backend-n5c2.onrender.com/api/employee/getAllEmployees"
-      );
-      const result = await response.json();
-      setEmployees(result);
-      setFilteredData(result);
-      setTotalEmployees(result.length);
+      try {
+        setIsLoading(true); // start loader
+        const response = await fetch(
+          "https://attendance-system-backend-n5c2.onrender.com/api/employee/getAllEmployees"
+        );
+        const result = await response.json();
+        setEmployees(result);
+        setFilteredData(result);
+        setTotalEmployees(result.length);
+      } catch (error) {
+        console.error("Error fetching employees:", error);
+      } finally {
+        setIsLoading(false); // stop loader
+      }
     };
     fetchEmployees();
   }, []);
@@ -110,7 +118,7 @@ const EmployeeList = () => {
     <>
       <Sidebar />
 
-      <div className="ml-80  p-6 bg-white rounded-2xl shadow-xl w-[75%] transition">
+      <div className="ml-80 p-6 bg-white rounded-2xl shadow-xl w-[75%] transition">
         <Header />
 
         {/* Search Bar */}
@@ -158,7 +166,13 @@ const EmployeeList = () => {
             </thead>
 
             <tbody>
-              {filteredData.length ? (
+              {isLoading ? (
+                <tr>
+                  <td colSpan="16" className="text-center py-4 text-gray-500">
+                    Loading employees...
+                  </td>
+                </tr>
+              ) : filteredData.length ? (
                 filteredData.map((emp, index) => (
                   <tr
                     key={emp._id}
