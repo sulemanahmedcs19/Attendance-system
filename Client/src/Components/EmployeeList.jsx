@@ -33,13 +33,13 @@ const EmployeeList = () => {
     fetchEmployees();
   }, []);
 
-  // Search Function
-  const handleSearchClick = () => {
+  // Live search - update filtered data as user types
+  useEffect(() => {
     const filtered = employees.filter((employee) =>
       employee.FName?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredData(filtered);
-  };
+  }, [searchTerm, employees]);
 
   // Update Click
   const handleUpdateClick = (employee) => {
@@ -59,10 +59,8 @@ const EmployeeList = () => {
   // Update Submit
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const id = selectedEmployee._id;
-
       const response = await fetch(
         `https://attendance-system-backend-n5c2.onrender.com/api/employee/updateEmployee/${id}`,
         {
@@ -123,22 +121,13 @@ const EmployeeList = () => {
 
         {/* Search Bar */}
         <div className="flex items-center justify-between mb-6 mt-10 px-4 py-3 bg-purple-50 rounded-lg shadow">
-          <div className="flex items-center gap-3 w-full">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search Employee..."
-              className="w-full pl-4 pr-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
-            <button
-              type="button"
-              onClick={handleSearchClick}
-              className="bg-purple-600 text-white px-5 py-2 rounded-md hover:bg-purple-700 transition"
-            >
-              Search
-            </button>
-          </div>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search Employee..."
+            className="w-full pl-4 pr-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
         </div>
 
         {/* Employee Table */}

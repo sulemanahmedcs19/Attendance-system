@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import profileLogo from "../assets/sidebar/profile.png";
+import logo from "../assets/roots.jpeg";
 
 function Login() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function Login() {
           className="text-purple-700 font-bold text-xl md:text-2xl"
           style={{ animation: "slideInTop 1s ease-out forwards" }}
         >
-          Welcome to ALPHA SOLUTIONS
+          Welcome to The Roots Digitals
         </h1>
       </div>
 
@@ -44,10 +44,10 @@ function Login() {
         `}
       </style>
 
-      {/* 🔹 Login Card */}
+      {/* 🔹 Updated & Bigger Login Card */}
       <div
         className={`
-          relative w-full max-w-md p-12 rounded-3xl
+          relative w-full max-w-lg p-14 rounded-3xl
           bg-white/70 backdrop-blur-lg border border-gray-200
           shadow-2xl text-center transition-all duration-700 ease-in-out
           ${
@@ -57,25 +57,26 @@ function Login() {
           }
         `}
       >
-        {/* 🔵 Centered Bouncing Logo */}
+        {/* 🔵 Bigger Bouncing Logo */}
         <div
           className="
-            w-24 h-24 mx-auto rounded-full bg-white
+            w-28 h-28 mx-auto rounded-full bg-white
             shadow-xl shadow-purple-300/50 border border-gray-200
             flex items-center justify-center animate-bounce
           "
         >
-          <img
-            src={profileLogo}
-            alt="logo"
-            className="w-16 h-16 object-contain"
-          />
+          <img src={logo} alt="logo" className="w-20 h-20 object-contain" />
         </div>
 
-        {/* Title */}
-        <h2 className="text-3xl font-bold mt-8 mb-8 text-gray-800">
-          Admin Login
+        {/* ⭐ Attendance App Title */}
+        <h2 className="text-4xl font-bold mt-6 text-purple-700">
+          Attendance App
         </h2>
+
+        {/* Login Title */}
+        <h3 className="text-3xl font-bold mt-4 mb-8 text-gray-800">
+          Admin Login
+        </h3>
 
         {/* Username Input */}
         <input
