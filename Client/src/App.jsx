@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  HashRouter as Router,
+} from "react-router-dom";
 import Dashboard from "./Components/Dashboard";
 import Employee from "./Components/Employee";
 import EmployeeList from "./Components/EmployeeList";
