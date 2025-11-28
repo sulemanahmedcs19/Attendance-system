@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  HashRouter as Router,
-} from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./Components/Dashboard";
 import Employee from "./Components/Employee";
 import EmployeeList from "./Components/EmployeeList";
@@ -28,12 +23,12 @@ function App() {
   }, []);
 
   // Callback from Employee.jsx to add new employee
-  function addEmployee(data) {
+  const addEmployee = (data) => {
     setEmployees((prev) => [...prev, data]);
-  }
+  };
 
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
@@ -52,7 +47,7 @@ function App() {
           element={<Attendance data={attendanceData} />}
         />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
