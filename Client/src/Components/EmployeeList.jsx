@@ -119,15 +119,23 @@ const EmployeeList = () => {
       <div className="ml-80 p-6 bg-white rounded-2xl shadow-xl w-[75%] transition">
         <Header />
 
-        {/* Search Bar */}
-        <div className="flex items-center justify-between mb-6 mt-10 px-4 py-3 bg-purple-50 rounded-lg shadow">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search Employee..."
-            className="w-full pl-4 pr-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
+        {/* Title and Search Bar Section */}
+        <div className="flex justify-between items-center mb-6 mt-10 px-4">
+          {/* Employees List Title */}
+          <h1 className="text-xl font-semibold text-[#3A3A3A] tracking-wide">
+            Employees List
+          </h1>
+
+          {/* Search Bar */}
+          <div className="flex items-center justify-end bg-purple-50 rounded-lg shadow px-4 py-3">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search Employee..."
+              className="pl-4 pr-4 py-2 w-64 rounded-lg bg-gray-100 border border-gray-300 text-sm focus:ring-2  focus:bg-white transition"
+            />
+          </div>
         </div>
 
         {/* Employee Table */}
@@ -150,6 +158,7 @@ const EmployeeList = () => {
                 <th className="py-3 px-4 text-left">Joining</th>
                 <th className="py-3 px-4 text-left">Department</th>
                 <th className="py-3 px-4 text-left">Work Type</th>
+                <th className="py-3 px-4 text-center">Password</th>
                 <th className="py-3 px-4 text-center">Actions</th>
               </tr>
             </thead>
@@ -184,6 +193,7 @@ const EmployeeList = () => {
                     <td className="py-2 px-4">{emp.DateOfJoining}</td>
                     <td className="py-2 px-4">{emp.Department}</td>
                     <td className="py-2 px-4">{emp.WorkType}</td>
+                    <td className="py-2 px-4">{emp.password}</td>
 
                     <td className="py-2 px-4 text-center flex gap-2 justify-center">
                       <button
@@ -242,6 +252,7 @@ const EmployeeList = () => {
                 ["DateOfJoining", "Date of Joining"],
                 ["Department", "Department"],
                 ["WorkType", "Work Type"],
+                ["password", "Password"],
               ].map(([key, label]) => (
                 <div key={key}>
                   <label className="text-sm text-gray-600">{label}</label>

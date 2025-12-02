@@ -52,6 +52,21 @@ function Attendance() {
     return matchSearch && matchDate;
   });
 
+  // Group data by date
+  const groupByDate = () => {
+    const grouped = {};
+
+    filteredData.forEach((item) => {
+      const date = getDBDate(item.CheckIn);
+      if (!grouped[date]) grouped[date] = [];
+      grouped[date].push(item);
+    });
+
+    return grouped;
+  };
+
+  const groupedAttendance = groupByDate();
+
   return (
     <>
       <Sidebar />
@@ -79,34 +94,43 @@ function Attendance() {
           </div>
         </div>
 
-        <div className="mt-6 rounded-xl border shadow-sm overflow-hidden">
-          {loading ? (
-            <div className="text-center py-20 text-gray-500 font-medium">
-              Loading attendance data...
-            </div>
-          ) : (
-            <table className="w-full text-sm">
-              <thead className="bg-purple-100 text-gray-900">
-                <tr>
-                  <th className="py-3 px-4 text-left font-semibold">ID</th>
-                  <th className="py-3 px-4 text-left font-semibold">
-                    Employee
-                  </th>
-                  <th className="py-3 px-4 text-left font-semibold">Date</th>
-                  <th className="py-3 px-4 text-left font-semibold">Status</th>
-                  <th className="py-3 px-4 text-left font-semibold">Remarks</th>
-                  <th className="py-3 px-4 text-left font-semibold">
-                    Check-in
-                  </th>
-                  <th className="py-3 px-4 text-left font-semibold">
-                    Check-out
-                  </th>
-                </tr>
-              </thead>
+        <div className="mt-6 space-y-10">
+          {Object.keys(groupedAttendance).map((date) => (
+            <div
+              key={date}
+              className="border rounded-xl shadow-sm overflow-hidden"
+            >
+              {/* Date Heading */}
+              <div className="bg-purple-200 py-3 px-4">
+                <h2 className="text-lg font-semibold text-gray-800">
+                  Attendance Date: {date}
+                </h2>
+              </div>
 
-              <tbody>
-                {filteredData.length > 0 ? (
-                  filteredData.map((item, index) => (
+              <table className="w-full text-sm">
+                <thead className="bg-purple-100 text-gray-900">
+                  <tr>
+                    <th className="py-3 px-4 text-left font-semibold">ID</th>
+                    <th className="py-3 px-4 text-left font-semibold">
+                      Employee
+                    </th>
+                    <th className="py-3 px-4 text-left font-semibold">
+                      Status
+                    </th>
+                    <th className="py-3 px-4 text-left font-semibold">
+                      Remarks
+                    </th>
+                    <th className="py-3 px-4 text-left font-semibold">
+                      Check-in
+                    </th>
+                    <th className="py-3 px-4 text-left font-semibold">
+                      Check-out
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {groupedAttendance[date].map((item, index) => (
                     <tr
                       key={item._id}
                       className={`${
@@ -117,7 +141,6 @@ function Attendance() {
                       <td className="py-3 px-4 font-semibold">
                         {item.employeeName}
                       </td>
-                      <td className="py-3 px-4">{getDBDate(item.CheckIn)}</td>
                       <td
                         className={`py-3 px-4 font-semibold ${
                           item.Status === "Present"
@@ -137,20 +160,11 @@ function Attendance() {
                         {formatTo12Hour(item.CheckOut)}
                       </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td
-                      colSpan={7}
-                      className="text-center py-5 text-gray-500 font-medium"
-                    >
-                      No attendance records found.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          )}
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
         </div>
       </div>
     </>

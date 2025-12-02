@@ -83,15 +83,16 @@ function Employee({ empData }) {
   return (
     <>
       <Sidebar />
-      <div className="ml-80  p-6 bg-white rounded-2xl shadow-xl w-[75%] transition">
+      <div className="ml-80 p-6 bg-white rounded-2xl shadow-xl w-[75%] transition">
         <Header />
-        <form onSubmit={handleSubmit}>
-          <div className="w-10% ml-8 mt-10 p-6 bg-white rounded-lg shadow-md">
-            <h1 className="text-2xl font-semibold text-gray-800 mb-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Basic Information Section */}
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h1 className="text-2xl font-semibold text-gray-800 mb-6">
               Basic Information
             </h1>
-            <div className="flex flex-wrap gap-6 mb-6">
-              <div className="w-85">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div className="w-full">
                 <label className="text-gray-700">Full Name</label>
                 <input
                   type="text"
@@ -102,7 +103,7 @@ function Employee({ empData }) {
                 />
               </div>
 
-              <div className="w-85">
+              <div className="w-full">
                 <label className="text-gray-700">Date of Birth</label>
                 <input
                   type="date"
@@ -113,7 +114,7 @@ function Employee({ empData }) {
                 />
               </div>
 
-              <div className="w-85">
+              <div className="w-full">
                 <label className="text-gray-700">CNIC Number</label>
                 <input
                   type="number"
@@ -124,7 +125,7 @@ function Employee({ empData }) {
                 />
               </div>
 
-              <div className="w-85">
+              <div className="w-full">
                 <label className="text-gray-700">Gender</label>
                 <select
                   value={employeeData.Gender}
@@ -141,7 +142,7 @@ function Employee({ empData }) {
                 </select>
               </div>
 
-              <div className="w-85">
+              <div className="w-full">
                 <label className="text-gray-700">Upload CNIC Photo</label>
                 <select
                   value={employeeData.CNICPhoto}
@@ -158,12 +159,15 @@ function Employee({ empData }) {
                 </select>
               </div>
             </div>
+          </div>
 
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          {/* Contact Details Section */}
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-6">
               Contact Details
             </h2>
-            <div className="flex flex-wrap gap-6 mb-6">
-              <div className="w-85">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div className="w-full">
                 <label className="text-gray-700">Home Address</label>
                 <input
                   type="text"
@@ -173,7 +177,8 @@ function Employee({ empData }) {
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 />
               </div>
-              <div className="w-85">
+
+              <div className="w-full">
                 <label className="text-gray-700">City</label>
                 <input
                   type="text"
@@ -183,7 +188,8 @@ function Employee({ empData }) {
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 />
               </div>
-              <div className="w-85">
+
+              <div className="w-full">
                 <label className="text-gray-700">Country</label>
                 <input
                   type="text"
@@ -193,7 +199,8 @@ function Employee({ empData }) {
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 />
               </div>
-              <div className="w-85">
+
+              <div className="w-full">
                 <label className="text-gray-700">Personal Email</label>
                 <input
                   type="email"
@@ -203,7 +210,8 @@ function Employee({ empData }) {
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 />
               </div>
-              <div className="w-85">
+
+              <div className="w-full">
                 <label className="text-gray-700">Emergency Contact</label>
                 <input
                   type="text"
@@ -214,12 +222,15 @@ function Employee({ empData }) {
                 />
               </div>
             </div>
+          </div>
 
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          {/* Roles & Work Details Section */}
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-6">
               Roles & Work Details
             </h2>
-            <div className="flex flex-wrap gap-6 mb-6">
-              <div className="w-85">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div className="w-full">
                 <label className="text-gray-700">Job Title</label>
                 <input
                   type="text"
@@ -229,7 +240,8 @@ function Employee({ empData }) {
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 />
               </div>
-              <div className="w-85">
+
+              <div className="w-full">
                 <label className="text-gray-700">Reporting Manager</label>
                 <input
                   type="text"
@@ -239,7 +251,8 @@ function Employee({ empData }) {
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 />
               </div>
-              <div className="w-85">
+
+              <div className="w-full">
                 <label className="text-gray-700">Date of Joining</label>
                 <input
                   type="date"
@@ -249,7 +262,8 @@ function Employee({ empData }) {
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 />
               </div>
-              <div className="w-85">
+
+              <div className="w-full">
                 <label className="text-gray-700">Department</label>
                 <input
                   type="text"
@@ -259,7 +273,8 @@ function Employee({ empData }) {
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 />
               </div>
-              <div className="w-85">
+
+              <div className="w-full">
                 <label className="text-gray-700">Work Type</label>
                 <input
                   type="text"
@@ -270,9 +285,13 @@ function Employee({ empData }) {
                 />
               </div>
             </div>
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-blue-500 text-white px-6 py-2 rounded-md mt-4"
+              className="bg-blue-500 text-white px-6 py-2 rounded-md mt-6"
             >
               Submit
             </button>
