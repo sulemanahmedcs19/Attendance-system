@@ -130,7 +130,6 @@ function Card() {
   return (
     <div className="p-6 flex flex-col gap-6">
       <div className="flex gap-4">
-        {/* LEFT CARD */}
         <div className="bg-white shadow-md rounded-lg p-4 w-[34%] h-[400px] flex items-center justify-center">
           <div>
             <div className="flex items-center mb-2">
@@ -144,7 +143,6 @@ function Card() {
           </div>
         </div>
 
-        {/* RIGHT CARDS */}
         <div className="grid grid-cols-3 gap-4 w-2/3">
           <div className="bg-white shadow-md rounded-lg p-3 h-[190px] flex items-center justify-center">
             <div className="flex items-center gap-4">
